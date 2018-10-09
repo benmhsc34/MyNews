@@ -7,6 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.benja.myapplication.ListItem;
 import com.example.benja.myapplication.MyAdapter;
@@ -14,6 +17,8 @@ import com.example.benja.myapplication.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
 
 public class PopularStoriesTab extends Fragment {
 
@@ -28,14 +33,14 @@ public class PopularStoriesTab extends Fragment {
         recyclerView = rootView.findViewById(R.id.fragment_main_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         listItems = new ArrayList<>();
 
         for (int i = 0; i <= 10; i++) {
-            ListItem listItem = new ListItem("heading " + (i + 1), "Dummy Test");
+            final ListItem listItem = new ListItem("heading " + (i + 1), "Dummy Test");
             listItems.add(listItem);
         }
         adapter = new MyAdapter(listItems, getContext());
+
 
         recyclerView.setAdapter(adapter);
         return rootView;

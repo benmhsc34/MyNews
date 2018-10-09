@@ -1,58 +1,85 @@
 package com.example.benja.myapplication;
 
 
+import com.google.gson.annotations.SerializedName;
+
 public class Hero {
 
+    String section;
+    String subsection;
+    String title;
+    String url;
+    String byline;
+    String item_type;
+    String update_date;
+    String created_date;
+    String published_date;
+    String material_type_facet;
+    String kicker;
+    String multimedia;
 
-    public String name;
-    public String realname;
-    public String team;
-    public String firstappearance;
-    public String createdby;
-    public String publisher;
-    public String imageurl;
-    public String bio;
-
-    public Hero(String name, String realname, String team, String firstappearance, String createdby, String publisher, String imageurl, String bio) {
-        this.name = name;
-        this.realname = realname;
-        this.team = team;
-        this.firstappearance = firstappearance;
-        this.createdby = createdby;
-        this.publisher = publisher;
-        this.imageurl = imageurl;
-        this.bio = bio;
+    public String getSection() {
+        return section;
     }
 
-    public String getName() {
-        return name;
+    public String getSubsection() {
+        return subsection;
     }
 
-    public String getRealname() {
-        return realname;
+    public String getTitle() {
+        return title;
     }
 
-    public String getTeam() {
-        return team;
+    public String getUrl() {
+        return url;
     }
 
-    public String getFirstappearance() {
-        return firstappearance;
+    public String getByline() {
+        return byline;
     }
 
-    public String getCreatedby() {
-        return createdby;
+    public String getItem_type() {
+        return item_type;
     }
 
-    public String getPublisher() {
-        return publisher;
+    public String getUpdate_date() {
+        return update_date;
     }
 
-    public String getImageurl() {
-        return imageurl;
+    public String getCreated_date() {
+        return created_date;
     }
 
-    public String getBio() {
-        return bio;
+    public String getPublished_date() {
+        return published_date;
+    }
+
+    public String getMaterial_type_facet() {
+        return material_type_facet;
+    }
+
+    public String getKicker() {
+        return kicker;
+    }
+
+    public String getMultimedia() {
+        return multimedia;
+    }
+
+    public Hero(String section, String subsection, String title, String url, String byline, String item_type, String update_date, String created_date, String published_date, String material_type_facet, String kicker, String multimedia) {
+        this.section = section;
+        this.subsection = subsection;
+        this.title = title;
+        this.url = url;
+        this.byline = byline;
+        this.item_type = item_type;
+        this.update_date = update_date;
+        this.created_date = created_date;
+        this.published_date = published_date;
+        this.material_type_facet = material_type_facet;
+        this.kicker = kicker;
+        this.multimedia = multimedia;
+
+
     }
 }

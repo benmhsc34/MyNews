@@ -50,7 +50,6 @@ public class TopStoriesTab extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<ListItem> listItems;
-    private static final String URL_DATA = "https://api.github.com/users/JakeWharton/following";
 
 
 
@@ -81,9 +80,8 @@ public class TopStoriesTab extends Fragment {
                 String[] heroNames = new String[heroes.size()];
 
                 for (int i = 0; i < heroes.size(); i++){
-                    heroNames[i] = heroes.get(i).getName();
-                    ListItem listItem = new ListItem(heroes.get(i).getName(),heroes.get(i).getBio());
-
+                    heroNames[i] = heroes.get(i).getTitle();
+                    ListItem listItem = new ListItem(heroes.get(i).getTitle(),heroes.get(i).getCreated_date());
                     listItems.add(listItem);
                 }
                 adapter = new MyAdapter(listItems, getContext());
