@@ -1,44 +1,26 @@
 package com.example.benja.myapplication.Tabs;
 
-import android.app.ProgressDialog;
-import android.app.VoiceInteractor;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
 import com.example.benja.myapplication.Api;
-import com.example.benja.myapplication.Hero;
+import com.example.benja.myapplication.Article;
 import com.example.benja.myapplication.ListItem;
 import com.example.benja.myapplication.MyAdapter;
 import com.example.benja.myapplication.R;
-import com.example.benja.myapplication.Utils.NetworkAsyncTask;
+import com.google.gson.annotations.SerializedName;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -52,6 +34,10 @@ public class TopStoriesTab extends Fragment {
     private List<ListItem> listItems;
 
 
+    public class ArticleList {
+
+        // ...
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,18 +56,21 @@ public class TopStoriesTab extends Fragment {
 
         Api api = retrofit.create(Api.class);
 
-        Call<List<Hero>> call = api.getHeroes();
+        Call<com.example.benja.myapplication.Article> call = api.getArticles();
 
-        call.enqueue(new Callback<List<Hero>>() {
+
+        call.enqueue(new Callback<Article>() {
             @Override
-            public void onResponse(Call<List<Hero>> call, retrofit2.Response<List<Hero>> response) {
-                List<Hero> heroes = response.body();
+            public void onResponse(Call<Article> call, retrofit2.Response<Article> response) {
+                Article articles = response.body();
 
-                String[] heroNames = new String[heroes.size()];
 
-                for (int i = 0; i < heroes.size(); i++){
-                    heroNames[i] = heroes.get(i).getTitle();
-                    ListItem listItem = new ListItem(heroes.get(i).getTitle(),heroes.get(i).getCreated_date());
+
+                String[] articleNames = new String[articles.size()];
+
+                for (int i = 0; i < articles.size(); i++){
+                    articleNames[i] = articles.get(i).getTitle();
+                    ListItem listItem = new ListItem(articles.get(i).getTitle(),articles.get(i).getCreated_date(), articles.get(i).getUrl(), getContext());
                     listItems.add(listItem);
                 }
                 adapter = new MyAdapter(listItems, getContext());
@@ -91,7 +80,7 @@ public class TopStoriesTab extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Hero>> call, Throwable t) {
+            public void onFailure(Call<Article> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

@@ -27,20 +27,19 @@ public class PopularStoriesTab extends Fragment {
     private List<ListItem> listItems;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.popular_stories_tab, container, false);
         recyclerView = rootView.findViewById(R.id.fragment_main_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         listItems = new ArrayList<>();
 
-        for (int i = 0; i <= 10; i++) {
-            final ListItem listItem = new ListItem("heading " + (i + 1), "Dummy Test");
+        for (int i = 0; i <= 9870; i++) {
+            final ListItem listItem = new ListItem("HEADING " + (i + 1), "Dummy Test", "http://static01.nyt.com/images/2018/10/09/briefing/100918evening-briefing-promo/100918evening-briefing-promo-thumbStandard.jpg", getContext());
             listItems.add(listItem);
         }
         adapter = new MyAdapter(listItems, getContext());
-
 
         recyclerView.setAdapter(adapter);
         return rootView;

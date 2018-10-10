@@ -1,5 +1,6 @@
 package com.example.benja.myapplication.Tabs;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,8 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
 import com.example.benja.myapplication.Api;
-import com.example.benja.myapplication.Hero;
+import com.example.benja.myapplication.Article;
 import com.example.benja.myapplication.ListItem;
 import com.example.benja.myapplication.MyAdapter;
 import com.example.benja.myapplication.R;
@@ -28,7 +32,7 @@ public class CustomStoriesTab extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<ListItem> listItems;
-
+    public static final String URL_DATA = "http://api.nytimes.com/svc/topstories/v2/home.json?api-key=5179fffa2a6545a0af9de0645194e78f";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,18 +48,18 @@ public class CustomStoriesTab extends Fragment {
 
         Api api = retrofit.create(Api.class);
 
-        Call<List<Hero>> call = api.getHeroes();
+        Call<List<Article>> call = api.getArticles();
 
-        call.enqueue(new Callback<List<Hero>>() {
+        call.enqueue(new Callback<List<Article>>() {
             @Override
-            public void onResponse(Call<List<Hero>> call, retrofit2.Response<List<Hero>> response) {
-                List<Hero> heroes = response.body();
+            public void onResponse(Call<List<Article>> call, retrofit2.Response<List<Article>> response) {
+                List<Article> articles = response.body();
 
-                String[] heroNames = new String[heroes.size()];
+                String[] articleNames = new String[articles.size()];
 
-                for (int i = 0; i < heroes.size(); i++){
-                    heroNames[i] = heroes.get(i).getTitle();
-                    ListItem listItem = new ListItem(heroes.get(i).getTitle(),heroes.get(i).getCreated_date());
+                for (int i = 0; i < articles.size(); i++){
+                    articleNames[i] = articles.get(i).getTitle();
+                    ListItem listItem = new ListItem(articles.get(i).getTitle(),articles.get(i).getCreated_date(), "https://static01.nyt.com/images/2018/10/09/briefing/100918evening-briefing-promo/100918evening-briefing-promo-thumbLarge.jpg", getContext());
 
                     listItems.add(listItem);
                 }
@@ -66,11 +70,12 @@ public class CustomStoriesTab extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Hero>> call, Throwable t) {
+            public void onFailure(Call<List<Article>> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
         return rootView;
     }
+
 }
