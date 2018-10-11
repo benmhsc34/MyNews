@@ -43,11 +43,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         ListItem listItem = listItems.get(i);
 
-
-        viewHolder.textViewHead.setText(listItem.getHeader());
-        viewHolder.textViewDesc.setText(listItem.getDesc());
+       viewHolder.textViewHead.append(listItem.getHeader());
+       viewHolder.textViewDesc.setText(listItem.getDesc());
         Picasso.with(context).load("https://images.sudouest.fr/2018/07/15/5b4b912a66a4bd733eb04b75/widescreen/1000x500/le-port-de-la-rochelle-envahi-de-plongeurs-improvises.jpg").into(viewHolder.profileImageView);
-
     }
 
     @Override

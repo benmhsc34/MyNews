@@ -33,6 +33,6 @@ public class ListItem {
     }
 
     public Context getContext() {
-        return context;
-    }
+    return context;
+}
 }

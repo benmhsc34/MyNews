@@ -1,5 +1,6 @@
 package com.example.benja.myapplication.Tabs;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,10 +14,15 @@ import android.widget.Toast;
 
 import com.example.benja.myapplication.Api;
 import com.example.benja.myapplication.Article;
+import com.example.benja.myapplication.ArticleList;
 import com.example.benja.myapplication.ListItem;
 import com.example.benja.myapplication.MyAdapter;
 import com.example.benja.myapplication.R;
 import com.google.gson.annotations.SerializedName;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +40,7 @@ public class TopStoriesTab extends Fragment {
     private List<ListItem> listItems;
 
 
-    public class ArticleList {
 
-        // ...
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,31 +59,26 @@ public class TopStoriesTab extends Fragment {
 
         Api api = retrofit.create(Api.class);
 
-        Call<com.example.benja.myapplication.Article> call = api.getArticles();
+        Call<com.example.benja.myapplication.ArticleList> call = api.getFirstArticles();
 
-
-        call.enqueue(new Callback<Article>() {
+        call.enqueue(new Callback<ArticleList>() {
             @Override
-            public void onResponse(Call<Article> call, retrofit2.Response<Article> response) {
-                Article articles = response.body();
+            public void onResponse(Call<ArticleList> call, retrofit2.Response<ArticleList> response) {
+                ArticleList articles = response.body();
+                List<Article> theListOfArticles = articles.getArticles();
 
 
-
-                String[] articleNames = new String[articles.size()];
-
-                for (int i = 0; i < articles.size(); i++){
-                    articleNames[i] = articles.get(i).getTitle();
-                    ListItem listItem = new ListItem(articles.get(i).getTitle(),articles.get(i).getCreated_date(), articles.get(i).getUrl(), getContext());
+                for (int i = 0; i < articles.getArticles().size(); i++) {
+                    ListItem listItem = new ListItem(theListOfArticles.get(i).getTitle(),theListOfArticles.get(i).getCreated_date(), theListOfArticles.get(i).getUrl(),getContext());
+                    recyclerView.setAdapter(adapter);
                     listItems.add(listItem);
-                }
-                adapter = new MyAdapter(listItems, getContext());
 
-                recyclerView.setAdapter(adapter);
+                }
 
             }
 
             @Override
-            public void onFailure(Call<Article> call, Throwable t) {
+            public void onFailure(Call<ArticleList> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

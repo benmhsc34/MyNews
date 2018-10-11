@@ -48,19 +48,23 @@ public class CustomStoriesTab extends Fragment {
 
         Api api = retrofit.create(Api.class);
 
-        Call<List<Article>> call = api.getArticles();
+      //  Call<Article> call = api.getFirstArticles();
 
-        call.enqueue(new Callback<List<Article>>() {
+     /*   call.enqueue(new Callback<Article>() {
             @Override
-            public void onResponse(Call<List<Article>> call, retrofit2.Response<List<Article>> response) {
-                List<Article> articles = response.body();
+            public void onResponse(Call<Article> call, retrofit2.Response<Article> response) {
+                Article articles = response.body();
 
-                String[] articleNames = new String[articles.size()];
+                List<Article> articleNamez = new ArrayList<>();
+                articleNamez.add(articles);
 
-                for (int i = 0; i < articles.size(); i++){
-                    articleNames[i] = articles.get(i).getTitle();
-                    ListItem listItem = new ListItem(articles.get(i).getTitle(),articles.get(i).getCreated_date(), "https://static01.nyt.com/images/2018/10/09/briefing/100918evening-briefing-promo/100918evening-briefing-promo-thumbLarge.jpg", getContext());
+                List<Article> articleNamex = new ArrayList<>();
 
+                //   String[] articleNames = new String[articles.size()];
+
+                for (int i = 0; i < articleNamez.size(); i++){
+                    articleNamex.add(i, articleNamez.get(i));
+                    ListItem listItem = new ListItem(articleNamex.get(i).getTitle(),articleNamex.get(i).getCreated_date(), articleNamex.get(i).getUrl(), getContext());
                     listItems.add(listItem);
                 }
                 adapter = new MyAdapter(listItems, getContext());
@@ -70,11 +74,11 @@ public class CustomStoriesTab extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Article>> call, Throwable t) {
+            public void onFailure(Call<Article> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
+*/
         return rootView;
     }
 
