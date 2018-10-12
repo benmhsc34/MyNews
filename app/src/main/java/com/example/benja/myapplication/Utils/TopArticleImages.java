@@ -2,7 +2,7 @@ package com.example.benja.myapplication.Utils;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ArticleImages {
+public class TopArticleImages {
 
     @SerializedName("imageUrl") String url;
     String height;
@@ -10,7 +10,7 @@ public class ArticleImages {
     String caption;
     String copyright;
 
-    public ArticleImages(String url, String height, String width, String caption, String copyright) {
+    public TopArticleImages(String url, String height, String width, String caption, String copyright) {
         this.url = url;
         this.height = height;
         this.width = width;

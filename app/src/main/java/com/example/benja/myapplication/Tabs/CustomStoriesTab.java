@@ -12,8 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.benja.myapplication.Api;
-import com.example.benja.myapplication.Utils.Article;
-import com.example.benja.myapplication.Utils.ArticleList;
+import com.example.benja.myapplication.Utils.TopArticle;
+import com.example.benja.myapplication.Utils.TopArticleList;
 import com.example.benja.myapplication.ListItem;
 import com.example.benja.myapplication.MyAdapter;
 import com.example.benja.myapplication.R;
@@ -52,15 +52,15 @@ public class CustomStoriesTab extends Fragment {
 
         Api api = retrofit.create(Api.class);
 
-        Call<ArticleList> call = api.getFirstArticles();
+        Call<TopArticleList> call = api.getTopArticles();
 
         recyclerView.setAdapter(adapter);
 
-        call.enqueue(new Callback<ArticleList>() {
+        call.enqueue(new Callback<TopArticleList>() {
             @Override
-            public void onResponse(Call<ArticleList> call, retrofit2.Response<ArticleList> response) {
-                ArticleList articles = response.body();
-                List<Article> theListOfArticles = articles.getArticles();
+            public void onResponse(Call<TopArticleList> call, retrofit2.Response<TopArticleList> response) {
+                TopArticleList articles = response.body();
+                List<TopArticle> theListOfArticles = articles.getArticles();
 
                 //Out of bounds and when get(i)
                 //theListOfArticles.get(i).getMultimedia().get(1).getUrl()
@@ -81,7 +81,7 @@ public class CustomStoriesTab extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ArticleList> call, Throwable t) {
+            public void onFailure(Call<TopArticleList> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.d("JSON", t.getMessage());
             }

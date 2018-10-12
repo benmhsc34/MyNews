@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Article {
+public class TopArticle {
 
     String section;
     @SerializedName("abstract")
@@ -20,7 +20,7 @@ public class Article {
     String published_date;
     String material_type_facet;
     String kicker;
-    List<ArticleImages> multimedia;
+    List<TopArticleImages> multimedia;
 
     public String getSection() {
         return section;
@@ -68,9 +68,9 @@ public class Article {
 
     public String getDescription() { return description; }
 
-    public List<ArticleImages> getMultimedia() { return multimedia; }
+    public List<TopArticleImages> getMultimedia() { return multimedia; }
 
-    public Article(String section, String description, String subsection, String title, String url, String byline, String item_type, String update_date, String created_date, String published_date, String material_type_facet, String kicker, List<ArticleImages> multimedia) {
+    public TopArticle(String section, String description, String subsection, String title, String url, String byline, String item_type, String update_date, String created_date, String published_date, String material_type_facet, String kicker, List<TopArticleImages> multimedia) {
         this.section = section;
         this.description = description;
         this.subsection = subsection;
