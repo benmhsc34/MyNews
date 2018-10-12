@@ -10,14 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.benja.myapplication.Api;
-import com.example.benja.myapplication.ListItem;
+import com.example.benja.myapplication.Utils.Api;
+import com.example.benja.myapplication.Utils.ListItem;
 import com.example.benja.myapplication.MyAdapter;
 import com.example.benja.myapplication.R;
-import com.example.benja.myapplication.Utils.PopularArticle;
-import com.example.benja.myapplication.Utils.PopularArticleList;
-import com.example.benja.myapplication.Utils.TopArticleList;
-import com.example.benja.myapplication.Utils.TopArticle;
+import com.example.benja.myapplication.Utils.Popular_API.PopularArticle;
+import com.example.benja.myapplication.Utils.Popular_API.PopularArticleList;
 
 import java.util.ArrayList;
 import java.util.List;

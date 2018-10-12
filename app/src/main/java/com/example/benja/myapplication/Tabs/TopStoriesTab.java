@@ -11,11 +11,10 @@ import android.support.v4.app.Fragment;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.benja.myapplication.Api;
-import com.example.benja.myapplication.Utils.PopularArticle;
-import com.example.benja.myapplication.Utils.TopArticle;
-import com.example.benja.myapplication.Utils.TopArticleList;
-import com.example.benja.myapplication.ListItem;
+import com.example.benja.myapplication.Utils.Api;
+import com.example.benja.myapplication.Utils.Top_API.TopArticle;
+import com.example.benja.myapplication.Utils.Top_API.TopArticleList;
+import com.example.benja.myapplication.Utils.ListItem;
 import com.example.benja.myapplication.MyAdapter;
 import com.example.benja.myapplication.R;
 

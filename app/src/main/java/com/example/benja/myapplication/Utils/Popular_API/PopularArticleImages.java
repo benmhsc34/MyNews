@@ -1,4 +1,4 @@
-package com.example.benja.myapplication.Utils;
+package com.example.benja.myapplication.Utils.Popular_API;
 
 public class PopularArticleImages {
     String url;

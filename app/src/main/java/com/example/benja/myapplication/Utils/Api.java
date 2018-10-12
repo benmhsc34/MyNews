@@ -1,7 +1,7 @@
-package com.example.benja.myapplication;
+package com.example.benja.myapplication.Utils;
 
-import com.example.benja.myapplication.Utils.PopularArticleList;
-import com.example.benja.myapplication.Utils.TopArticleList;
+import com.example.benja.myapplication.Utils.Popular_API.PopularArticleList;
+import com.example.benja.myapplication.Utils.Top_API.TopArticleList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

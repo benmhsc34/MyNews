@@ -1,4 +1,4 @@
-package com.example.benja.myapplication;
+package com.example.benja.myapplication.Utils;
 
 import android.content.Context;
 import android.net.Uri;

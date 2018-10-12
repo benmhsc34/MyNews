@@ -1,5 +1,6 @@
-package com.example.benja.myapplication.Utils;
+package com.example.benja.myapplication.Utils.Popular_API;
 
+import com.example.benja.myapplication.Utils.Top_API.TopArticleImages;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
