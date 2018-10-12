@@ -1,12 +1,15 @@
-package com.example.benja.myapplication;
+package com.example.benja.myapplication.Utils;
 
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Article {
 
     String section;
-    @SerializedName("abstract") String description;
+    @SerializedName("abstract")
+    String description;
     String subsection;
     String title;
     String url;
@@ -17,7 +20,7 @@ public class Article {
     String published_date;
     String material_type_facet;
     String kicker;
-    String multimedia;
+    List<ArticleImages> multimedia;
 
     public String getSection() {
         return section;
@@ -63,12 +66,13 @@ public class Article {
         return kicker;
     }
 
-    public String getMultimedia() {
-        return multimedia;
-    }
+    public String getDescription() { return description; }
 
-    public Article(String section, String subsection, String title, String url, String byline, String item_type, String update_date, String created_date, String published_date, String material_type_facet, String kicker, String multimedia) {
+    public List<ArticleImages> getMultimedia() { return multimedia; }
+
+    public Article(String section, String description, String subsection, String title, String url, String byline, String item_type, String update_date, String created_date, String published_date, String material_type_facet, String kicker, List<ArticleImages> multimedia) {
         this.section = section;
+        this.description = description;
         this.subsection = subsection;
         this.title = title;
         this.url = url;
@@ -80,7 +84,6 @@ public class Article {
         this.material_type_facet = material_type_facet;
         this.kicker = kicker;
         this.multimedia = multimedia;
-
-
     }
 }
+

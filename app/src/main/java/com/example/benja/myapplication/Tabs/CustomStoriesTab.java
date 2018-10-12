@@ -1,20 +1,19 @@
 package com.example.benja.myapplication.Tabs;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.toolbox.StringRequest;
 import com.example.benja.myapplication.Api;
-import com.example.benja.myapplication.Article;
+import com.example.benja.myapplication.Utils.Article;
+import com.example.benja.myapplication.Utils.ArticleList;
 import com.example.benja.myapplication.ListItem;
 import com.example.benja.myapplication.MyAdapter;
 import com.example.benja.myapplication.R;
@@ -29,57 +28,65 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CustomStoriesTab extends Fragment {
 
+
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<ListItem> listItems;
-    public static final String URL_DATA = "http://api.nytimes.com/svc/topstories/v2/home.json?api-key=5179fffa2a6545a0af9de0645194e78f";
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.custom_stories_tab, container, false);
+        final View rootView = inflater.inflate(R.layout.top_stories_tab, container, false);
+        TextView tv = rootView.findViewById(R.id.section_label);
 
 
         recyclerView = rootView.findViewById(R.id.fragment_main_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         listItems = new ArrayList<>();
+        adapter = new MyAdapter(listItems, getContext());
+
+
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
         Api api = retrofit.create(Api.class);
 
-      //  Call<Article> call = api.getFirstArticles();
+        Call<ArticleList> call = api.getFirstArticles();
 
-     /*   call.enqueue(new Callback<Article>() {
+        recyclerView.setAdapter(adapter);
+
+        call.enqueue(new Callback<ArticleList>() {
             @Override
-            public void onResponse(Call<Article> call, retrofit2.Response<Article> response) {
-                Article articles = response.body();
+            public void onResponse(Call<ArticleList> call, retrofit2.Response<ArticleList> response) {
+                ArticleList articles = response.body();
+                List<Article> theListOfArticles = articles.getArticles();
 
-                List<Article> articleNamez = new ArrayList<>();
-                articleNamez.add(articles);
+                //Out of bounds and when get(i)
+                //theListOfArticles.get(i).getMultimedia().get(1).getUrl()
 
-                List<Article> articleNamex = new ArrayList<>();
+                for (int i = 0; i < articles.getArticles().size(); i++) {
+                    ListItem listItem = new ListItem(theListOfArticles.get(i).getSection(),
+                            theListOfArticles.get(i).getSubsection(),
+                            theListOfArticles.get(i).getTitle(),
+                            theListOfArticles.get(i).getCreated_date(),
+                            "http://static01.nyt.com/images/2018/10/09/briefing/100918evening-briefing-promo/100918evening-briefing-promo-thumbStandard.jpg",
+                            getContext());
 
-                //   String[] articleNames = new String[articles.size()];
-
-                for (int i = 0; i < articleNamez.size(); i++){
-                    articleNamex.add(i, articleNamez.get(i));
-                    ListItem listItem = new ListItem(articleNamex.get(i).getTitle(),articleNamex.get(i).getCreated_date(), articleNamex.get(i).getUrl(), getContext());
                     listItems.add(listItem);
+
+
                 }
-                adapter = new MyAdapter(listItems, getContext());
-
-                recyclerView.setAdapter(adapter);
-
+                adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<Article> call, Throwable t) {
+            public void onFailure(Call<ArticleList> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                Log.d("JSON", t.getMessage());
             }
         });
-*/
+
         return rootView;
     }
-
 }

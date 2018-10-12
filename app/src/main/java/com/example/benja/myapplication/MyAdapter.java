@@ -1,8 +1,6 @@
 package com.example.benja.myapplication;
 
 import android.content.Context;
-import android.net.Uri;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,6 +22,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private Context context;
 
 
+    @BindView(R.id.pic)
+    ImageView profileImageView;
 
     public MyAdapter(List<ListItem> listItems, Context context) {
         this.listItems = listItems;
@@ -43,9 +43,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         ListItem listItem = listItems.get(i);
 
-       viewHolder.textViewHead.append(listItem.getHeader());
-       viewHolder.textViewDesc.setText(listItem.getDesc());
-        Picasso.with(context).load("https://images.sudouest.fr/2018/07/15/5b4b912a66a4bd733eb04b75/widescreen/1000x500/le-port-de-la-rochelle-envahi-de-plongeurs-improvises.jpg").into(viewHolder.profileImageView);
+        viewHolder.textViewSection.setText(listItem.getSection());
+        viewHolder.textViewSubsection.setText(listItem.getSubsection());
+        viewHolder.textViewTitle.setText(listItem.getDesc());
+        viewHolder.textViewDate.setText(listItem.getDate());
+        Picasso.with(context).load("http://static01.nyt.com/images/2018/10/09/briefing/100918evening-briefing-promo/100918evening-briefing-promo-thumbStandard.jpg").into(profileImageView);
     }
 
     @Override
@@ -54,17 +56,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textViewHead;
-        public TextView textViewDesc;
-        @BindView(R.id.pic)
-        ImageView profileImageView;
+        public TextView textViewSection;
+        public TextView textViewSubsection;
+        public TextView textViewTitle;
+        public TextView textViewDate;
+        public ImageView imageViewPic;
+
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textViewHead = itemView.findViewById(R.id.head);
-            textViewDesc = itemView.findViewById(R.id.desc);
+            textViewSection = itemView.findViewById(R.id.section);
+            textViewSubsection = itemView.findViewById(R.id.subsection);
+            textViewTitle = itemView.findViewById(R.id.desc);
+            textViewDate = itemView.findViewById(R.id.dateTextView);
             profileImageView = itemView.findViewById(R.id.pic);
+
+
             ButterKnife.bind(this, itemView);
 
         }

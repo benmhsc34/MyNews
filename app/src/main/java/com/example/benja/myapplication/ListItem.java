@@ -5,27 +5,27 @@ import android.net.Uri;
 
 public class ListItem {
 
-    String header;
+    String section;
+    String subsection;
     String desc;
+    String date;
     String url;
     Context context;
 
-
-    public ListItem(String header, String desc, String url, Context context) {
-        this.header = header;
-        this.desc = desc;
-        this.url = url;
-        this.context = context;
+    public String getSection() {
+        return section;
     }
 
-    public String getHeader() {
-
-        return header;
+    public String getSubsection() {
+        return subsection;
     }
 
     public String getDesc() {
-
         return desc;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public String getUrl() {
@@ -33,6 +33,16 @@ public class ListItem {
     }
 
     public Context getContext() {
-    return context;
-}
+        return context;
+    }
+
+    public ListItem(String section, String subsection, String desc, String date, String url, Context context) {
+
+        this.section = section;
+        this.subsection = subsection;
+        this.desc = desc;
+        this.date = date;
+        this.url = url;
+        this.context = context;
+    }
 }

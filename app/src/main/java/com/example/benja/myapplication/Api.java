@@ -1,6 +1,6 @@
 package com.example.benja.myapplication;
 
-import java.util.List;
+import com.example.benja.myapplication.Utils.ArticleList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

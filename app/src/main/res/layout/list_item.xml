@@ -16,26 +16,65 @@
 
             <ImageView
                 android:id="@+id/pic"
-                android:layout_width="120dp"
-                android:layout_height="50dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_marginEnd="10dp"
                 android:src="@drawable/image" />
 
             <TextView
-                android:id="@+id/head"
-                android:layout_width="match_parent"
+                android:id="@+id/section"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/pic"
-                android:text="Heading"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:text="section"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/subsection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/specific"
+                android:text="subsection"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=">"
+                android:layout_toEndOf="@+id/section"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:id="@+id/specific"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:text="date"
+                android:id="@+id/dateTextView"/>
 
             <TextView
                 android:id="@+id/desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/head"
+                android:layout_below="@+id/section"
                 android:layout_toEndOf="@+id/pic"
-                android:text="Description" />
+                android:text="Description"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignBottom="@+id/desc"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/darker_gray" />
 
 
         </RelativeLayout>

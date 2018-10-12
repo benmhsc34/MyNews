@@ -1,5 +1,6 @@
-package com.example.benja.myapplication;
+package com.example.benja.myapplication.Utils;
 
+import com.example.benja.myapplication.Utils.Article;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

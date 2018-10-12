@@ -36,8 +36,8 @@ public class PopularStoriesTab extends Fragment {
         listItems = new ArrayList<>();
 
         for (int i = 0; i <= 91; i++) {
-      //      final ListItem listItem = new ListItem("HEADING " + (i + 1), "Dummy Test", "http://static01.nyt.com/images/2018/10/09/briefing/100918evening-briefing-promo/100918evening-briefing-promo-thumbStandard.jpg", getContext());
-      //    listItems.add(listItem);
+            final ListItem listItem = new ListItem("section", "subsection", "lorem", "DATE", "http://static01.nyt.com/images/2018/10/09/briefing/100918evening-briefing-promo/100918evening-briefing-promo-thumbStandard.jpg", getContext());
+         listItems.add(listItem);
         }
         adapter = new MyAdapter(listItems, getContext());
 
