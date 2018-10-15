@@ -1,11 +1,10 @@
 package com.example.benja.myapplication.Utils.Popular_API;
 
-import com.example.benja.myapplication.Utils.Top_API.TopArticleImages;
 import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 public class PopularArticle {
+
     String url;
     String section;
     String title;
@@ -13,14 +12,6 @@ public class PopularArticle {
     String published_date;
     List<PopularArticleImagesFolder> media;
 
-    public PopularArticle(String url, String section, String title, String description, String published_date, List<TopArticleImages> multimedia) {
-        this.url = url;
-        this.section = section;
-        this.title = title;
-        this.description = description;
-        this.published_date = published_date;
-        this.media = media;
-    }
 
     public String getUrl() {
         return url;
@@ -42,7 +33,18 @@ public class PopularArticle {
         return published_date;
     }
 
-    public List<PopularArticleImagesFolder> getMultimedia() {
+    public List<PopularArticleImagesFolder> getMedia() {
         return media;
     }
+
+    public PopularArticle(String url, String section, String title, String description, String published_date, List<PopularArticleImagesFolder> media) {
+        this.url = url;
+        this.section = section;
+        this.title = title;
+        this.description = description;
+        this.published_date = published_date;
+        this.media = media;
+
+    }
 }
+

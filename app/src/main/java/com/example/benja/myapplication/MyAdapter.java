@@ -1,6 +1,7 @@
 package com.example.benja.myapplication;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,8 +24,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private Context context;
 
 
-    @BindView(R.id.pic)
-    ImageView profileImageView;
 
     public MyAdapter(List<ListItem> listItems, Context context) {
         this.listItems = listItems;
@@ -48,7 +47,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         viewHolder.textViewSubsection.setText(listItem.getSubsection());
         viewHolder.textViewTitle.setText(listItem.getDesc());
         viewHolder.textViewDate.setText(listItem.getDate());
-        Picasso.with(context).load("http://static01.nyt.com/images/2018/10/09/briefing/100918evening-briefing-promo/100918evening-briefing-promo-thumbStandard.jpg").into(profileImageView);
+        Picasso.with(context).load(listItem.getUrl()).into(viewHolder.imageViewPic);
     }
 
     @Override
@@ -72,7 +71,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             textViewSubsection = itemView.findViewById(R.id.subsection);
             textViewTitle = itemView.findViewById(R.id.desc);
             textViewDate = itemView.findViewById(R.id.dateTextView);
-            profileImageView = itemView.findViewById(R.id.pic);
+            imageViewPic = itemView.findViewById(R.id.pic);
 
 
             ButterKnife.bind(this, itemView);

@@ -7,13 +7,19 @@ import java.util.List;
 class PopularArticleImagesFolder {
     @SerializedName("media-metadata")
     List<PopularArticleImages> mediaData;
+    String subtype;
 
-    public PopularArticleImagesFolder(List<PopularArticleImages> mediaData) {
+    public PopularArticleImagesFolder(List<PopularArticleImages> mediaData, String subtype) {
         this.mediaData = mediaData;
+        this.subtype = subtype;
     }
 
     public List<PopularArticleImages> getMediaData() {
         return mediaData;
+    }
+
+    public String getSubtype() {
+        return subtype;
     }
 }
 

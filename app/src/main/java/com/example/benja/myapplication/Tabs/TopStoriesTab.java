@@ -1,5 +1,6 @@
 package com.example.benja.myapplication.Tabs;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -62,37 +63,44 @@ public class TopStoriesTab extends Fragment {
                 TopArticleList articles = response.body();
                 final List<TopArticle> theListOfArticles = articles.getArticles();
 
-
-
-                //Out of bounds and when get(i)
-                //theListOfArticles.get(i).getMultimedia().get(1).getUrl()
-
                 for (int i = 0; i < articles.getArticles().size(); i++) {
-                    ListItem listItem = new ListItem(theListOfArticles.get(i).getSection(),
-                            theListOfArticles.get(i).getSubsection(),
-                            theListOfArticles.get(i).getTitle(),
-                            "Today",
-                            "http://static01.nyt.com/images/2018/10/09/briefing/100918evening-briefing-promo/100918evening-briefing-promo-thumbStandard.jpg",
-                            getContext());
-                    listItems.add(listItem);
+                    int limit = theListOfArticles.get(i).getMultimedia().size();
+                    if (limit != 0) {
+                        ListItem listItem = new ListItem(theListOfArticles.get(i).getSection(),
+                                theListOfArticles.get(i).getSubsection(),
+                                theListOfArticles.get(i).getTitle(),
+                                "Today",
+                                theListOfArticles.get(i).getMultimedia().get(0).getUrl(),
+                                //.replace("https://", "http://")
+                                getContext());
 
-
-
-
+                        listItems.add(listItem);
+                    }
+                    else {
+                        ListItem listItem = new ListItem(theListOfArticles.get(i).getSection(),
+                                theListOfArticles.get(i).getSubsection(),
+                                theListOfArticles.get(i).getTitle(),
+                                "Today",
+                                "http://static01.nyt.com/images/2018/10/09/briefing/100918evening-briefing-promo/100918evening-briefing-promo-thumbStandard.jpg",
+                                getContext());
+                        listItems.add(listItem);
+                    }
                 }
-                adapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onFailure(Call<TopArticleList> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-                Log.d("JSON", t.getMessage());
-            }
-        });
+
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onFailure (Call < TopArticleList > call, Throwable t){
+                    Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.d("JSON", t.getMessage());
+                }
+            });
 
         return rootView;
-    }
+        }
 
-}
+    }
 
 
