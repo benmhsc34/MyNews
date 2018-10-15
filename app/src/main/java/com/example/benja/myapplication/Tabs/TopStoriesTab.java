@@ -75,8 +75,7 @@ public class TopStoriesTab extends Fragment {
                                 getContext());
 
                         listItems.add(listItem);
-                    }
-                    else {
+                    } else {
                         ListItem listItem = new ListItem(theListOfArticles.get(i).getSection(),
                                 theListOfArticles.get(i).getSubsection(),
                                 theListOfArticles.get(i).getTitle(),
@@ -87,20 +86,22 @@ public class TopStoriesTab extends Fragment {
                     }
                 }
 
+                Log.d("isthisworking", "link: " + theListOfArticles.get(0).getMultimedia().get(0).getHeight());
 
-                    adapter.notifyDataSetChanged();
-                }
 
-                @Override
-                public void onFailure (Call < TopArticleList > call, Throwable t){
-                    Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.d("JSON", t.getMessage());
-                }
-            });
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<TopArticleList> call, Throwable t) {
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                Log.d("JSON", t.getMessage());
+            }
+        });
 
         return rootView;
-        }
-
     }
+
+}
 
 

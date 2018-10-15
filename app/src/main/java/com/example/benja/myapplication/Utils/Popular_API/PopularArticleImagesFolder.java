@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-class PopularArticleImagesFolder {
+public class PopularArticleImagesFolder {
     @SerializedName("media-metadata")
     List<PopularArticleImages> mediaData;
     String subtype;
