@@ -9,7 +9,8 @@ public class ListItem {
     String subsection;
     String desc;
     String date;
-    String url;
+    String urlImage;
+    String urlWebsite;
     Context context;
 
     public String getSection() {
@@ -28,21 +29,22 @@ public class ListItem {
         return date;
     }
 
-    public String getUrl() {
-        return url;
-    }
 
     public Context getContext() {
         return context;
     }
 
-    public ListItem(String section, String subsection, String desc, String date, String url, Context context) {
+    public String getUrlImage() { return urlImage; }
 
+    public String getUrlWebsite() { return urlWebsite; }
+
+    public ListItem(String section, String subsection, String desc, String date, String urlImage, String urlWebsite, Context context) {
         this.section = section;
         this.subsection = subsection;
         this.desc = desc;
         this.date = date;
-        this.url = url;
+        this.urlImage = urlImage;
+        this.urlWebsite = urlWebsite;
         this.context = context;
     }
 }

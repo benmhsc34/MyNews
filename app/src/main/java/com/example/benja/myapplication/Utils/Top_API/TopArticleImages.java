@@ -4,23 +4,21 @@ import com.google.gson.annotations.SerializedName;
 
 public class TopArticleImages {
 
-    @SerializedName("imageUrl") String url;
+    @SerializedName("imageUrl") String urlImage;
     String height;
     String width;
     String caption;
     String copyright;
 
-    public TopArticleImages(String url, String height, String width, String caption, String copyright) {
-        this.url = url;
+    public TopArticleImages(String urlImage, String height, String width, String caption, String copyright) {
+        this.urlImage = urlImage;
         this.height = height;
         this.width = width;
         this.caption = caption;
         this.copyright = copyright;
     }
 
-    public String getUrl() {
-        return url;
-    }
+    public String getUrlImage() { return urlImage; }
 
     public String getHeight() {
         return height;

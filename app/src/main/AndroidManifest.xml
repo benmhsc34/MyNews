@@ -31,7 +31,11 @@
         <activity
             android:name=".Toolbar.AboutActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".Toolbar.SearchActivity" android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".Toolbar.SearchActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".WebviewActivity"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

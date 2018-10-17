@@ -71,6 +71,7 @@ public class CustomStoriesTab extends Fragment {
                             theListOfArticles.get(i).getTitle(),
                             theListOfArticles.get(i).getCreated_date(),
                             "http://static01.nyt.com/images/2018/10/09/briefing/100918evening-briefing-promo/100918evening-briefing-promo-thumbStandard.jpg",
+                            theListOfArticles.get(i).getUrl(),
                             getContext());
 
                     listItems.add(listItem);

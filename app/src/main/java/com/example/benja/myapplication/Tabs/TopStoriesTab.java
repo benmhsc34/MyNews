@@ -75,9 +75,13 @@ public class TopStoriesTab extends Fragment {
                                     theListOfArticles.get(i).getSubsection(),
                                     theListOfArticles.get(i).getTitle(),
                                     "Today",
-                                    theListOfArticles.get(i).getMultimedia().get(0).getUrl(),
+                                    theListOfArticles.get(i).getMultimedia().get(0).getUrlImage(),
+
+                                    //.replace("https://", "http://"),
                                     //.replace("https://", "http://")
+                                    theListOfArticles.get(i).getUrl(),
                                     getContext());
+                 
 
                             listItems.add(listItem);
 
@@ -89,12 +93,12 @@ public class TopStoriesTab extends Fragment {
                                 theListOfArticles.get(i).getTitle(),
                                 "Today",
                                 "http://static01.nyt.com/images/2018/10/09/briefing/100918evening-briefing-promo/100918evening-briefing-promo-thumbStandard.jpg",
+                                theListOfArticles.get(i).getUrl(),
                                 getContext());
                         listItems.add(listItem);
                     }
                 }
 
-                Log.d("isthisworking", "link: " + theListOfArticles.get(0).getMultimedia().get(0).getUrl());
 
 
                 adapter.notifyDataSetChanged();

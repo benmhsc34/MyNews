@@ -1,6 +1,7 @@
 package com.example.benja.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.benja.myapplication.Toolbar.SearchActivity;
 import com.example.benja.myapplication.Utils.ListItem;
 import com.squareup.picasso.Picasso;
 
@@ -56,12 +58,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         if (listItem.getSubsection().equals("")){viewHolder.specificTextView.setVisibility(View.INVISIBLE);}
         viewHolder.textViewTitle.setText(listItem.getDesc());
         viewHolder.textViewDate.setText(listItem.getDate());
-        Picasso.with(context).load(listItem.getUrl()).into(viewHolder.imageViewPic);
+        Picasso.with(context).load(listItem.getUrlImage()).into(viewHolder.imageViewPic);
 
         viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "You click on ::" + listItem.getSection(), Toast.LENGTH_LONG).show();
+                Intent myIntent = new Intent(context, WebviewActivity.class);
+                myIntent.putExtra("websiteUrl", listItem.getUrlWebsite());
+                context.startActivity(myIntent);
             }
         });
     }
