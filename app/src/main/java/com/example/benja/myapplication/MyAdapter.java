@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.benja.myapplication.Utils.ListItem;
 import com.squareup.picasso.Picasso;
@@ -22,9 +24,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private List<ListItem> listItems;
     private Context context;
+    private OnItemClickListener mListener;
 
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
 
-
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
 
     public MyAdapter(List<ListItem> listItems, Context context) {
         this.listItems = listItems;
@@ -41,7 +49,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        ListItem listItem = listItems.get(i);
+        final ListItem listItem = listItems.get(i);
 
         viewHolder.textViewSection.setText(listItem.getSection());
         viewHolder.textViewSubsection.setText(listItem.getSubsection());
@@ -49,6 +57,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         viewHolder.textViewTitle.setText(listItem.getDesc());
         viewHolder.textViewDate.setText(listItem.getDate());
         Picasso.with(context).load(listItem.getUrl()).into(viewHolder.imageViewPic);
+
+        viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "You click on ::" + listItem.getSection(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -63,10 +78,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public TextView textViewDate;
         public ImageView imageViewPic;
         final public TextView specificTextView;
+        public RelativeLayout relativeLayout;
 
 
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
             textViewSection = itemView.findViewById(R.id.section);
@@ -75,9 +91,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             textViewDate = itemView.findViewById(R.id.dateTextView);
             imageViewPic = itemView.findViewById(R.id.pic);
             specificTextView = itemView.findViewById(R.id.specific);
-
+            relativeLayout = itemView.findViewById(R.id.relativeLayout);
 
             ButterKnife.bind(this, itemView);
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mListener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION);{
+                            mListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
 
         }
     }

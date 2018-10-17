@@ -50,6 +50,7 @@ public class TopStoriesTab extends Fragment {
 
 
 
+
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
         Api api = retrofit.create(Api.class);
@@ -57,6 +58,7 @@ public class TopStoriesTab extends Fragment {
         Call<TopArticleList> call = api.getTopArticles();
 
         recyclerView.setAdapter(adapter);
+
 
         call.enqueue(new Callback<TopArticleList>() {
             @Override
@@ -78,6 +80,8 @@ public class TopStoriesTab extends Fragment {
                                     getContext());
 
                             listItems.add(listItem);
+
+
 
                     } else {
                         ListItem listItem = new ListItem(theListOfArticles.get(i).getSection(),
