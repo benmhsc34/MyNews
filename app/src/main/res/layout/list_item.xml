@@ -26,9 +26,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/pic"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:text="section"
-                android:textSize="15sp"/>
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/subsection"
@@ -37,28 +37,26 @@
                 android:layout_toEndOf="@+id/specific"
                 android:text="subsection"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:textSize="15sp"
-                />
+                android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/specific"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=">"
-                android:layout_toEndOf="@+id/section"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:id="@+id/specific"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:textSize="15sp"
-                />
+                android:layout_toEndOf="@+id/section"
+                android:text=">"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/dateTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:text="date"
-                android:id="@+id/dateTextView"/>
+                android:text="date" />
 
             <TextView
                 android:id="@+id/desc"

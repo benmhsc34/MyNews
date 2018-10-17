@@ -1,6 +1,8 @@
 package com.example.benja.myapplication.Utils.Top_API;
 
 
+import android.net.Uri;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

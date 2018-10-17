@@ -49,6 +49,7 @@ public class TopStoriesTab extends Fragment {
         adapter = new MyAdapter(listItems, getContext());
 
 
+
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
         Api api = retrofit.create(Api.class);
@@ -64,17 +65,20 @@ public class TopStoriesTab extends Fragment {
                 final List<TopArticle> theListOfArticles = articles.getArticles();
 
                 for (int i = 0; i < articles.getArticles().size(); i++) {
+
                     int limit = theListOfArticles.get(i).getMultimedia().size();
                     if (limit != 0) {
-                        ListItem listItem = new ListItem(theListOfArticles.get(i).getSection(),
-                                theListOfArticles.get(i).getSubsection(),
-                                theListOfArticles.get(i).getTitle(),
-                                "Today",
-                                theListOfArticles.get(i).getMultimedia().get(0).getUrl(),
-                                //.replace("https://", "http://")
-                                getContext());
 
-                        listItems.add(listItem);
+                            ListItem listItem = new ListItem(theListOfArticles.get(i).getSection(),
+                                    theListOfArticles.get(i).getSubsection(),
+                                    theListOfArticles.get(i).getTitle(),
+                                    "Today",
+                                    theListOfArticles.get(i).getMultimedia().get(0).getUrl(),
+                                    //.replace("https://", "http://")
+                                    getContext());
+
+                            listItems.add(listItem);
+
                     } else {
                         ListItem listItem = new ListItem(theListOfArticles.get(i).getSection(),
                                 theListOfArticles.get(i).getSubsection(),
@@ -86,7 +90,7 @@ public class TopStoriesTab extends Fragment {
                     }
                 }
 
-                Log.d("isthisworking", "link: " + theListOfArticles.get(0).getMultimedia().get(0).getHeight());
+                Log.d("isthisworking", "link: " + theListOfArticles.get(0).getMultimedia().get(0).getUrl());
 
 
                 adapter.notifyDataSetChanged();

@@ -15,6 +15,7 @@ import com.example.benja.myapplication.Utils.ListItem;
 import com.example.benja.myapplication.MyAdapter;
 import com.example.benja.myapplication.R;
 import com.example.benja.myapplication.Utils.Popular_API.PopularArticle;
+import com.example.benja.myapplication.Utils.Popular_API.PopularArticleImages;
 import com.example.benja.myapplication.Utils.Popular_API.PopularArticleList;
 
 import java.util.ArrayList;
@@ -61,6 +62,7 @@ public class PopularStoriesTab extends Fragment {
 
 
                 for (int i = 0; i < articles.getArticles().size(); i++) {
+
                     if (theListOfArticles.get(i).getMedia() == null) {
                         ListItem listItem = new ListItem(theListOfArticles.get(i).getSection(),
                                 "",
@@ -74,13 +76,12 @@ public class PopularStoriesTab extends Fragment {
                                 "",
                                 theListOfArticles.get(i).getTitle(),
                                 theListOfArticles.get(i).getPublished_date(),
-                                theListOfArticles.get(i).getMedia().get(0).getMediaData().get(i).getUrl(),
+                                "https://static01.nyt.com/images/2018/10/11/opinion/11krugmanWeb/11krugmanWeb-thumbStandard.jpg",
+                                // theListOfArticles.get(i).getMedia().get(0).getMediaData().get(i).getUrl(),
                                 //.replace("https://", "http://")
                                 getContext());
                         listItems.add(listItem);
                     }
-
-
                 }
                 adapter.notifyDataSetChanged();
             }

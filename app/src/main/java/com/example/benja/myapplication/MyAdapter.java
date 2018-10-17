@@ -25,6 +25,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 
 
+
     public MyAdapter(List<ListItem> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
@@ -35,7 +36,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item, viewGroup, false);
-
         return new ViewHolder(v);
     }
 
@@ -45,6 +45,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         viewHolder.textViewSection.setText(listItem.getSection());
         viewHolder.textViewSubsection.setText(listItem.getSubsection());
+        if (listItem.getSubsection().equals("")){viewHolder.specificTextView.setVisibility(View.INVISIBLE);}
         viewHolder.textViewTitle.setText(listItem.getDesc());
         viewHolder.textViewDate.setText(listItem.getDate());
         Picasso.with(context).load(listItem.getUrl()).into(viewHolder.imageViewPic);
@@ -61,6 +62,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public TextView textViewTitle;
         public TextView textViewDate;
         public ImageView imageViewPic;
+        final public TextView specificTextView;
 
 
 
@@ -72,6 +74,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             textViewTitle = itemView.findViewById(R.id.desc);
             textViewDate = itemView.findViewById(R.id.dateTextView);
             imageViewPic = itemView.findViewById(R.id.pic);
+            specificTextView = itemView.findViewById(R.id.specific);
 
 
             ButterKnife.bind(this, itemView);

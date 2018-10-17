@@ -46,5 +46,6 @@ public class PopularArticle {
         this.media = media;
 
     }
+
 }
 

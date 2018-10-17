@@ -1,5 +1,6 @@
 package com.example.benja.myapplication;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,10 +12,15 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.benja.myapplication.Tabs.CustomStoriesTab;
 import com.example.benja.myapplication.Tabs.PopularStoriesTab;
 import com.example.benja.myapplication.Tabs.TopStoriesTab;
+import com.example.benja.myapplication.Toolbar.AboutActivity;
+import com.example.benja.myapplication.Toolbar.HelpActivity;
+import com.example.benja.myapplication.Toolbar.SearchActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,8 +44,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ImageView seachIcon = findViewById(R.id.searchIcon);
+        seachIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+
+
+
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -73,12 +93,19 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_notification) {
+
             return true;
         }
         if (id == R.id.action_help) {
+            Intent myIntent = new Intent(MainActivity.this, HelpActivity.class);
+            MainActivity.this.startActivity(myIntent);
+
             return true;
         }
         if (id == R.id.action_about) {
+            Intent myIntent = new Intent(MainActivity.this, AboutActivity.class);
+            MainActivity.this.startActivity(myIntent);
+
             return true;
         }
 
