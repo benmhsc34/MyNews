@@ -60,8 +60,8 @@ public class SearchResultActivity extends AppCompatActivity {
                 for (int i = 0; i < theListOfArticles.size(); i++) {
 
 
-                    ListItem listItem = new ListItem("",
-                            "",
+                    ListItem listItem = new ListItem("de",
+                            "de",
                             theListOfArticles.get(i).getDocs().get(0).getDescription(),
                             theListOfArticles.get(i).getDocs().get(0).getPub_date(),
                             "https://static01.nyt.com/images/2018/10/11/opinion/11krugmanWeb/11krugmanWeb-thumbStandard.jpg".replace("https://", "http://"),

@@ -20,6 +20,7 @@ import com.example.benja.myapplication.Tabs.PopularStoriesTab;
 import com.example.benja.myapplication.Tabs.TopStoriesTab;
 import com.example.benja.myapplication.Toolbar.AboutActivity;
 import com.example.benja.myapplication.Toolbar.HelpActivity;
+import com.example.benja.myapplication.Toolbar.NotificationActivity;
 import com.example.benja.myapplication.Toolbar.SearchActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Create the adapter that will return a fragment for each of the three
@@ -65,10 +66,10 @@ public class MainActivity extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
@@ -93,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_notification) {
-
+            Intent myIntent = new Intent(MainActivity.this, NotificationActivity.class);
+            MainActivity.this.startActivity(myIntent);
             return true;
         }
         if (id == R.id.action_help) {

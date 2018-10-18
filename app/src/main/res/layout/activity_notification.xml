@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Toolbar.SearchActivity">
+    tools:context=".Toolbar.NotificationActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,76 +20,12 @@
             android:hint="Search query term"
             tools:ignore="HardcodedText" />
 
-        <LinearLayout
-            android:id="@+id/linearLayoutDate"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/editTextSearch"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <TextView
-                android:id="@+id/beginDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_weight="1"
-                android:text="Begin Date"
-                android:textSize="15sp"
-                tools:ignore="HardcodedText" />
-
-            <TextView
-                android:id="@+id/endDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_weight="1"
-                android:text="End Date"
-                android:textSize="15sp"
-                tools:ignore="HardcodedText" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/editTextLL"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/linearLayoutDate"
-            android:weightSum="2">
-
-            <EditText
-                android:id="@+id/editTextBeginDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:editable="false"
-                android:focusable="false"
-                android:hint="MM/DD/YY"
-                tools:ignore="HardcodedText,KeyboardInaccessibleWidget" />
-
-            <EditText
-                android:id="@+id/editTextEndDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:editable="false"
-                android:focusable="false"
-                android:hint="MM/DD/YY"
-                tools:ignore="HardcodedText,KeyboardInaccessibleWidget" />
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/checkboxLL1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/editTextLL"
+            android:layout_below="@id/editTextSearch"
             android:layout_marginTop="30dp"
             android:weightSum="2">
 
@@ -163,15 +99,33 @@
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/searchButton"
+        <TextView
+            android:id="@+id/theLine"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="2dp"
             android:layout_below="@+id/checkboxLL3"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_margin="20dp"
+            android:background="#696969" />
+
+        <TextView
+            android:id="@+id/oncePerDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/theLine"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="30dp"
-            android:text="Search"
+            android:text="Enable notifications (once per day)"
+            android:textColor="#000"
+            android:textSize="18sp"
             tools:ignore="HardcodedText" />
+
+
+        <Switch
+            android:id="@+id/notificationSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/oncePerDay"
+            android:layout_below="@id/theLine"/>
     </RelativeLayout>
+
 </android.support.constraint.ConstraintLayout>
