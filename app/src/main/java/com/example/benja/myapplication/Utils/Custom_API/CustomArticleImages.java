@@ -1,11 +1,11 @@
-package com.example.benja.myapplication.Utils.Popular_API;
+package com.example.benja.myapplication.Utils.Custom_API;
 
-public class PopularArticleImages {
+public class CustomArticleImages {
     private String url;
     private int height;
     private int weight;
 
-    public PopularArticleImages(String url, int height, int weight) {
+    public CustomArticleImages(String url, int height, int weight) {
         this.url = url;
         this.height = height;
         this.weight = weight;

@@ -12,6 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.benja.myapplication.Utils.Api;
+import com.example.benja.myapplication.Utils.Custom_API.CustomArticle;
+import com.example.benja.myapplication.Utils.Custom_API.CustomArticleList;
+import com.example.benja.myapplication.Utils.Popular_API.PopularArticle;
+import com.example.benja.myapplication.Utils.Popular_API.PopularArticleList;
 import com.example.benja.myapplication.Utils.Top_API.TopArticle;
 import com.example.benja.myapplication.Utils.Top_API.TopArticleList;
 import com.example.benja.myapplication.Utils.ListItem;
@@ -23,6 +27,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -52,37 +57,49 @@ public class CustomStoriesTab extends Fragment {
 
         Api api = retrofit.create(Api.class);
 
-        Call<TopArticleList> call = api.getTopArticles();
+        Call<CustomArticleList> call = api.getCustomArticles();
 
         recyclerView.setAdapter(adapter);
-
-        call.enqueue(new Callback<TopArticleList>() {
+        call.enqueue(new Callback<CustomArticleList>() {
             @Override
-            public void onResponse(Call<TopArticleList> call, retrofit2.Response<TopArticleList> response) {
-                TopArticleList articles = response.body();
-                List<TopArticle> theListOfArticles = articles.getArticles();
+            public void onResponse(Call<CustomArticleList> call, Response<CustomArticleList> response) {
+                CustomArticleList articles = response.body();
+                List<CustomArticle> theListOfArticles = articles.getArticles();
 
-                //Out of bounds and when get(i)
-                //theListOfArticles.get(i).getMultimedia().get(1).getUrl()
+
+                //theListOfArticles.get(0).getMedia().get(0).getMediaData().get(0).getUrl();
+
 
                 for (int i = 0; i < articles.getArticles().size(); i++) {
-                    ListItem listItem = new ListItem(theListOfArticles.get(i).getSection(),
-                            theListOfArticles.get(i).getSubsection(),
-                            theListOfArticles.get(i).getTitle(),
-                            theListOfArticles.get(i).getCreated_date(),
-                            "http://static01.nyt.com/images/2018/10/09/briefing/100918evening-briefing-promo/100918evening-briefing-promo-thumbStandard.jpg",
-                            theListOfArticles.get(i).getUrl(),
-                            getContext());
 
-                    listItems.add(listItem);
-
-
+                    if (theListOfArticles.get(i).getMedia() == null) {
+                        ListItem listItem = new ListItem(theListOfArticles.get(i).getSection(),
+                                "",
+                                theListOfArticles.get(i).getTitle(),
+                                theListOfArticles.get(i).getPublished_date(),
+                                "https://static01.nyt.com/images/2018/10/11/opinion/11krugmanWeb/11krugmanWeb-thumbStandard.jpg".replace("https://", "http://"),
+                                theListOfArticles.get(i).getUrl(),
+                                getContext());
+                        listItems.add(listItem);
+                    } else {
+                        ListItem listItem = new ListItem(theListOfArticles.get(i).getSection(),
+                                "",
+                                theListOfArticles.get(i).getTitle(),
+                                theListOfArticles.get(i).getPublished_date(),
+                                "https://static01.nyt.com/images/2018/10/11/opinion/11krugmanWeb/11krugmanWeb-thumbStandard.jpg",
+                                // theListOfArticles.get(i).getMedia().get(0).getMediaData().get(i).getUrl(),
+                                //.replace("https://", "http://")
+                                theListOfArticles.get(i).getUrl(),
+                                getContext());
+                        listItems.add(listItem);
+                    }
                 }
                 adapter.notifyDataSetChanged();
             }
 
+
             @Override
-            public void onFailure(Call<TopArticleList> call, Throwable t) {
+            public void onFailure(Call<CustomArticleList> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.d("JSON", t.getMessage());
             }

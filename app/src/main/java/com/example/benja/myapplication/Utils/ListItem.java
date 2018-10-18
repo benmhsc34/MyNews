@@ -29,7 +29,6 @@ public class ListItem {
         return date;
     }
 
-
     public Context getContext() {
         return context;
     }

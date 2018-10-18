@@ -2,6 +2,7 @@ package com.example.benja.myapplication.Tabs;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,11 +29,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class TopStoriesTab extends Fragment {
+public class TopStoriesTab extends Fragment{
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<ListItem> listItems;
+
+    public SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -47,8 +50,6 @@ public class TopStoriesTab extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         listItems = new ArrayList<>();
         adapter = new MyAdapter(listItems, getContext());
-
-
 
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
@@ -71,20 +72,19 @@ public class TopStoriesTab extends Fragment {
                     int limit = theListOfArticles.get(i).getMultimedia().size();
                     if (limit != 0) {
 
-                            ListItem listItem = new ListItem(theListOfArticles.get(i).getSection(),
-                                    theListOfArticles.get(i).getSubsection(),
-                                    theListOfArticles.get(i).getTitle(),
-                                    "Today",
-                                    theListOfArticles.get(i).getMultimedia().get(0).getUrlImage(),
+                        ListItem listItem = new ListItem(theListOfArticles.get(i).getSection(),
+                                theListOfArticles.get(i).getSubsection(),
+                                theListOfArticles.get(i).getTitle(),
+                                "Today",
+                                theListOfArticles.get(i).getMultimedia().get(0).getUrlImage(),
 
-                                    //.replace("https://", "http://"),
-                                    //.replace("https://", "http://")
-                                    theListOfArticles.get(i).getUrl(),
-                                    getContext());
-                 
+                                //.replace("https://", "http://"),
+                                //.replace("https://", "http://")
+                                theListOfArticles.get(i).getUrl(),
+                                getContext());
 
-                            listItems.add(listItem);
 
+                        listItems.add(listItem);
 
 
                     } else {
@@ -100,7 +100,6 @@ public class TopStoriesTab extends Fragment {
                 }
 
 
-
                 adapter.notifyDataSetChanged();
             }
 
@@ -113,6 +112,7 @@ public class TopStoriesTab extends Fragment {
 
         return rootView;
     }
+
 
 }
 

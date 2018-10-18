@@ -18,8 +18,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
             android:hint="|Search query term"
-            tools:ignore="HardcodedText"
-            />
+            tools:ignore="HardcodedText" />
 
         <LinearLayout
             android:id="@+id/linearLayoutDate"
@@ -165,13 +164,14 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/searchButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/checkboxLL3"
-            android:text="Search"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
+            android:text="Search"
             tools:ignore="HardcodedText" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
