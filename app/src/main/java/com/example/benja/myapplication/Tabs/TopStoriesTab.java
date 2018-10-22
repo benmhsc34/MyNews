@@ -78,7 +78,7 @@ public class TopStoriesTab extends Fragment{
                                 "Today",
                                 theListOfArticles.get(i).getMultimedia().get(0).getUrlImage(),
 
-                                //.replace("https://", "http://"),
+                                //.replace("https://", "http://")
                                 //.replace("https://", "http://")
                                 theListOfArticles.get(i).getUrl(),
                                 getContext());
