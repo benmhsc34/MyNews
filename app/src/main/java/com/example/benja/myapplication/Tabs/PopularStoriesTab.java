@@ -58,9 +58,6 @@ public class PopularStoriesTab extends Fragment {
                 List<PopularArticle> theListOfArticles = articles.getArticles();
 
 
-                //theListOfArticles.get(0).getMedia().get(0).getMediaData().get(0).getUrl();
-
-
                 for (int i = 0; i < articles.getArticles().size(); i++) {
 
                     if (theListOfArticles.get(i).getMedia() == null) {

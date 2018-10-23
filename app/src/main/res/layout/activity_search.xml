@@ -94,6 +94,7 @@
             android:weightSum="2">
 
             <CheckBox
+                android:id="@+id/artsCB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -103,6 +104,7 @@
                 tools:ignore="HardcodedText" />
 
             <CheckBox
+                android:id="@+id/politicsCB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -120,15 +122,17 @@
             android:weightSum="2">
 
             <CheckBox
+                android:id="@+id/businessCB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_weight="1"
-                android:text="Buisness"
+                android:text="Business"
                 android:textSize="20sp"
                 tools:ignore="HardcodedText" />
 
             <CheckBox
+                android:id="@+id/sportsCB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -146,6 +150,7 @@
             android:weightSum="2">
 
             <CheckBox
+                android:id="@+id/entrepreneursCB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -155,6 +160,7 @@
                 tools:ignore="HardcodedText" />
 
             <CheckBox
+                android:id="@+id/travelCB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

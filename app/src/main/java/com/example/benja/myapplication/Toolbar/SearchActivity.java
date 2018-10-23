@@ -2,18 +2,22 @@ package com.example.benja.myapplication.Toolbar;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import com.example.benja.myapplication.MainActivity;
 import com.example.benja.myapplication.R;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class SearchActivity extends AppCompatActivity {
@@ -23,12 +27,37 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        final EditText searchEditText = findViewById(R.id.editTextSearch);
+        final CheckBox artsCB = findViewById(R.id.artsCB);
+        final CheckBox businessCB = findViewById(R.id.businessCB);
+        final CheckBox entrepreneursCB = findViewById(R.id.entrepreneursCB);
+        final CheckBox sportsCB = findViewById(R.id.sportsCB);
+        final CheckBox travelCB = findViewById(R.id.travelCB);
+        final CheckBox politicsCB = findViewById(R.id.politicsCB);
+        final List<String> categoriesSelected = new ArrayList<>();
+        final String[] beginDate = new String[1];
+        final String[] theEndDate = new String[1];
 
         Button searchButton = findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                String searchQuery = searchEditText.getText().toString();
+                if (artsCB.isChecked()){categoriesSelected.add("arts");}
+                if (entrepreneursCB.isChecked()){categoriesSelected.add("entrepreneurs");}
+                if (businessCB.isChecked()){categoriesSelected.add("business");}
+                if (sportsCB.isChecked()){categoriesSelected.add("sports");}
+                if (travelCB.isChecked()){categoriesSelected.add("travel");}
+                if (politicsCB.isChecked()){categoriesSelected.add("politics");}
+                String theBeginDateString = beginDate[0];
+                String theEndDateString = theEndDate[0];
+
                 Intent myIntent = new Intent(SearchActivity.this, SearchResultActivity.class);
+                myIntent.putExtra("searchQuery", searchQuery);
+                myIntent.putExtra("categoriesSelected", (ArrayList) categoriesSelected);
+                myIntent.putExtra("theBeginDateString", theBeginDateString);
+                myIntent.putExtra("theEndDateString", theEndDateString);
                 SearchActivity.this.startActivity(myIntent);
             }
         });
@@ -38,6 +67,7 @@ public class SearchActivity extends AppCompatActivity {
         final Calendar myCalendar = Calendar.getInstance();
         //Date picker for the begin date
         EditText edittext= findViewById(R.id.editTextBeginDate);
+
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -50,10 +80,11 @@ public class SearchActivity extends AppCompatActivity {
                 updateLabel();
             }
             private void updateLabel() {
-                String myFormat = "MM/dd/yy"; //In which you need put here
+                String myFormat = "MM/dd/yy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 EditText editTextBeginDate = findViewById(R.id.editTextBeginDate);
                 editTextBeginDate.setText(sdf.format(myCalendar.getTime()));
+                beginDate[0] = sdf.format(myCalendar.getTime());
 
             }
         };
@@ -87,7 +118,8 @@ public class SearchActivity extends AppCompatActivity {
                 String myFormat = "MM/dd/yy"; //In which you need put here
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 EditText editText2 = findViewById(R.id.editTextEndDate);
-                editText2.setText(sdf.format(myCalendar.getTime()));;
+                editText2.setText(sdf.format(myCalendar.getTime()));
+                theEndDate[0] = sdf.format(myCalendar.getTime());
 
             }
         };

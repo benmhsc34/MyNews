@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class TopArticleImages {
 
-    @SerializedName("imageUrl") String urlImage;
+    @SerializedName("url") String urlImage;
     String height;
     String width;
     String caption;

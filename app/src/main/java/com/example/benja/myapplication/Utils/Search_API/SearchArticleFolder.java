@@ -2,10 +2,10 @@ package com.example.benja.myapplication.Utils.Search_API;
 
 import java.util.List;
 
-public class SeachArticleFolder {
+public class SearchArticleFolder {
     List<SearchArticle> docs;
 
-    public SeachArticleFolder(List<SearchArticle> docs) {
+    public SearchArticleFolder(List<SearchArticle> docs) {
         this.docs = docs;
     }
 

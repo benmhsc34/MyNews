@@ -1,15 +1,16 @@
 package com.example.benja.myapplication.Utils.Search_API;
 
 import java.util.List;
+import retrofit2.Call;
 
 public class SearchArticleList {
-    List<SeachArticleFolder> response;
+    private SearchArticleFolder response;
 
-    public SearchArticleList(List<SeachArticleFolder> response) {
+    public SearchArticleList(SearchArticleFolder response) {
         this.response = response;
     }
 
-    public List<SeachArticleFolder> getResponse() {
+    public SearchArticleFolder getResponse() {
         return response;
     }
 }
