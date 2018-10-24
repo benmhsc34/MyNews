@@ -77,7 +77,7 @@ public class CustomStoriesTab extends Fragment {
                                 "",
                                 theListOfArticles.get(i).getTitle(),
                                 theListOfArticles.get(i).getPublished_date(),
-                                "https://static01.nyt.com/images/2018/10/11/opinion/11krugmanWeb/11krugmanWeb-thumbStandard.jpg".replace("https://", "http://"),
+                                "https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/44686792_1020357278142901_5098647331683696640_n.jpg?_nc_cat=108&_nc_ht=scontent-cdg2-1.xx&oh=dc5de8b11cdc369b0240a420f09e2d2a&oe=5C5547E8".replace("https://", "http://"),
                                 theListOfArticles.get(i).getUrl(),
                                 getContext());
                         listItems.add(listItem);

@@ -1,11 +1,13 @@
 package com.example.benja.myapplication.Toolbar;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -37,6 +39,16 @@ public class SearchActivity extends AppCompatActivity {
         final List<String> categoriesSelected = new ArrayList<>();
         final String[] beginDate = new String[1];
         final String[] theEndDate = new String[1];
+
+        searchEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    hideKeyboard(view);
+                }
+            }
+        });
+
 
         Button searchButton = findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +92,7 @@ public class SearchActivity extends AppCompatActivity {
                 updateLabel();
             }
             private void updateLabel() {
-                String myFormat = "MM/dd/yy";
+                String myFormat = "yyyy/MM/dd";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 EditText editTextBeginDate = findViewById(R.id.editTextBeginDate);
                 editTextBeginDate.setText(sdf.format(myCalendar.getTime()));
@@ -115,7 +127,8 @@ public class SearchActivity extends AppCompatActivity {
                 updateLabel();
             }
             private void updateLabel() {
-                String myFormat = "MM/dd/yy"; //In which you need put here
+                //String myFormat = "MM/dd/yy"; //In which you need put here
+                String myFormat = "yyyy/MM/dd"; //In which you need put here
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 EditText editText2 = findViewById(R.id.editTextEndDate);
                 editText2.setText(sdf.format(myCalendar.getTime()));
@@ -134,6 +147,11 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void hideKeyboard(View rootView) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
     }
 
 }

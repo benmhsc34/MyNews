@@ -2,6 +2,7 @@ package com.example.benja.myapplication.Utils;
 
 import com.example.benja.myapplication.Utils.Custom_API.CustomArticleList;
 import com.example.benja.myapplication.Utils.Popular_API.PopularArticleList;
+import com.example.benja.myapplication.Utils.Search_API.SearchArticleFolder;
 import com.example.benja.myapplication.Utils.Search_API.SearchArticleList;
 import com.example.benja.myapplication.Utils.Top_API.TopArticleList;
 
@@ -24,10 +25,10 @@ public interface Api {
 
    // @GET("search/v2/articlesearch.json?api-key=5179fffa2a6545a0af9de0645194e78f")
    // Call<SearchArticleList> getSearchArticles();
-    @GET("search")
+    @GET("search/v2/articlesearch.json")
     Call<SearchArticleList> getSearchArticles(@Query("q") String one,
-                                              @Query("fq") String two,
-                                              @Query("begin_date") String three,
-                                              @Query("end_date") String four,
-                                              @Query("api-key") String key);
+                                                @Query("fq") String two,
+                                                @Query("begin_date") String three,
+                                                @Query("end_date") String four,
+                                                @Query("api-key") String key);
 }
