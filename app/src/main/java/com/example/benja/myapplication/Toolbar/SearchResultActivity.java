@@ -1,5 +1,6 @@
 package com.example.benja.myapplication.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +23,11 @@ import com.example.benja.myapplication.Utils.Search_API.SearchArticle;
 import com.example.benja.myapplication.Utils.Search_API.SearchArticleFolder;
 import com.example.benja.myapplication.Utils.Search_API.SearchArticleList;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -44,7 +49,6 @@ public class SearchResultActivity extends AppCompatActivity {
         TextView noResultsTV = findViewById(R.id.noResultsTV);
 
 
-
         String searchQuery = "";
         String theBeginDateString = null;
         String theEndDateString = null;
@@ -57,14 +61,36 @@ public class SearchResultActivity extends AppCompatActivity {
             categoriesSelected = bundle.getStringArrayList("categoriesSelected");
         }
 
-        if (categoriesSelected.size() !=0){
+        DateFormat inputFormat = new SimpleDateFormat("MM/dd/yyyy");
+        DateFormat outputFormat = new SimpleDateFormat("yyyyMMdd");
+        String inputDateStr = theBeginDateString;
+        String endInputDateStr = theEndDateString;
+        Date date = null;
+        Date endDate = null;
+        String outputDateStr = null;
+        String endOutputDateStr = null;
 
+        if (inputDateStr != null) {
+            try {
+                date = inputFormat.parse(inputDateStr);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            outputDateStr = outputFormat.format(date);
+
+        }
+        if (endInputDateStr != null) {
+            try {
+                endDate = inputFormat.parse(endInputDateStr);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            endOutputDateStr = outputFormat.format(endDate);
         }
 
 
-
         if (searchQuery.equals("")) {
-            noResultsTV.setText("Please enter valid criteria");
+            noResultsTV.setText("Please enter a term in the search");
         } else {
 
             recyclerView = findViewById(R.id.search_recycler_view);
@@ -80,30 +106,29 @@ public class SearchResultActivity extends AppCompatActivity {
 
             Call<SearchArticleList> call = null;
 
-            switch (categoriesSelected.size()){
+            switch (categoriesSelected.size()) {
                 case 0:
-                    call = api.getSearchArticles(searchQuery, "", theBeginDateString, theEndDateString, "5179fffa2a6545a0af9de0645194e78f");
+                    call = api.getSearchArticles(searchQuery, "", outputDateStr, endOutputDateStr, "5179fffa2a6545a0af9de0645194e78f");
                     break;
                 case 1:
-                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0), theBeginDateString, theEndDateString, "5179fffa2a6545a0af9de0645194e78f");
+                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0), outputDateStr, endOutputDateStr, "5179fffa2a6545a0af9de0645194e78f");
                     break;
                 case 2:
-                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1), theBeginDateString, theEndDateString, "5179fffa2a6545a0af9de0645194e78f");
+                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1), outputDateStr, endOutputDateStr, "5179fffa2a6545a0af9de0645194e78f");
                     break;
                 case 3:
-                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2), theBeginDateString, theEndDateString, "5179fffa2a6545a0af9de0645194e78f");
+                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2), outputDateStr, endOutputDateStr, "5179fffa2a6545a0af9de0645194e78f");
                     break;
                 case 4:
-                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2) + "," + categoriesSelected.get(3), theBeginDateString, theEndDateString, "5179fffa2a6545a0af9de0645194e78f");
+                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2) + "," + categoriesSelected.get(3), outputDateStr, endOutputDateStr, "5179fffa2a6545a0af9de0645194e78f");
                     break;
                 case 5:
-                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2) + "," + categoriesSelected.get(3) + "," + categoriesSelected.get(4), theBeginDateString, theEndDateString, "5179fffa2a6545a0af9de0645194e78f");
+                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2) + "," + categoriesSelected.get(3) + "," + categoriesSelected.get(4), outputDateStr, endOutputDateStr, "5179fffa2a6545a0af9de0645194e78f");
                     break;
                 case 6:
-                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2) + "," + categoriesSelected.get(3) + "," + categoriesSelected.get(4) + "," + categoriesSelected.get(5), theBeginDateString, theEndDateString , "5179fffa2a6545a0af9de0645194e78f");
+                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2) + "," + categoriesSelected.get(3) + "," + categoriesSelected.get(4) + "," + categoriesSelected.get(5), outputDateStr, endOutputDateStr, "5179fffa2a6545a0af9de0645194e78f");
                     break;
             }
-
 
 
             recyclerView.setAdapter(adapter);

@@ -92,7 +92,7 @@ public class SearchActivity extends AppCompatActivity {
                 updateLabel();
             }
             private void updateLabel() {
-                String myFormat = "yyyy/MM/dd";
+                String myFormat = "MM/dd/yyyy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 EditText editTextBeginDate = findViewById(R.id.editTextBeginDate);
                 editTextBeginDate.setText(sdf.format(myCalendar.getTime()));
@@ -127,13 +127,11 @@ public class SearchActivity extends AppCompatActivity {
                 updateLabel();
             }
             private void updateLabel() {
-                //String myFormat = "MM/dd/yy"; //In which you need put here
-                String myFormat = "yyyy/MM/dd"; //In which you need put here
+                String myFormat = "MM/dd/yyyy"; //In which you need put here
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 EditText editText2 = findViewById(R.id.editTextEndDate);
                 editText2.setText(sdf.format(myCalendar.getTime()));
                 theEndDate[0] = sdf.format(myCalendar.getTime());
-
             }
         };
 
