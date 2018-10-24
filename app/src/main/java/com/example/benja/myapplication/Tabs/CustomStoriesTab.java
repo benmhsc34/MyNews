@@ -22,7 +22,11 @@ import com.example.benja.myapplication.Utils.ListItem;
 import com.example.benja.myapplication.MyAdapter;
 import com.example.benja.myapplication.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -72,11 +76,22 @@ public class CustomStoriesTab extends Fragment {
 
                 for (int i = 0; i < articles.getArticles().size(); i++) {
 
+                    DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    DateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
+                    String inputDateStr = theListOfArticles.get(i).getPublished_date();
+                    Date date = null;
+                    try {
+                        date = inputFormat.parse(inputDateStr);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    String outputDateStr = outputFormat.format(date);
+
                     if (theListOfArticles.get(i).getMedia() == null) {
                         ListItem listItem = new ListItem(theListOfArticles.get(i).getSection(),
                                 "",
                                 theListOfArticles.get(i).getTitle(),
-                                theListOfArticles.get(i).getPublished_date(),
+                                outputDateStr,
                                 "https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/44686792_1020357278142901_5098647331683696640_n.jpg?_nc_cat=108&_nc_ht=scontent-cdg2-1.xx&oh=dc5de8b11cdc369b0240a420f09e2d2a&oe=5C5547E8".replace("https://", "http://"),
                                 theListOfArticles.get(i).getUrl(),
                                 getContext());
@@ -85,7 +100,7 @@ public class CustomStoriesTab extends Fragment {
                         ListItem listItem = new ListItem(theListOfArticles.get(i).getSection(),
                                 "",
                                 theListOfArticles.get(i).getTitle(),
-                                theListOfArticles.get(i).getPublished_date(),
+                                outputDateStr,
                                 theListOfArticles.get(i).getMedia().get(0).getMediaData().get(0).getUrl().replace("https://", "http://"),
                                 theListOfArticles.get(i).getUrl(),
                                 getContext());
