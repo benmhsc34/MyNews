@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.benja.myapplication.MyAdapter;
@@ -40,8 +41,11 @@ public class SearchResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
+        TextView noResultsTV = findViewById(R.id.noResultsTV);
 
-        String searchQuery = null;
+
+
+        String searchQuery = "";
         String theBeginDateString = null;
         String theEndDateString = null;
         ArrayList<String> categoriesSelected = null;
@@ -53,61 +57,96 @@ public class SearchResultActivity extends AppCompatActivity {
             categoriesSelected = bundle.getStringArrayList("categoriesSelected");
         }
 
+        if (categoriesSelected.size() !=0){
 
-        recyclerView = findViewById(R.id.search_recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(SearchResultActivity.this));
-        listItems = new ArrayList<>();
-        adapter = new MyAdapter(listItems, SearchResultActivity.this);
+        }
 
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
-        Api api = retrofit.create(Api.class);
+        if (searchQuery.equals("")) {
+            noResultsTV.setText("Please enter valid criteria");
+        } else {
 
-        Call<SearchArticleList> call = api.getSearchArticles(searchQuery, categoriesSelected.get(0), theBeginDateString, theEndDateString, "5179fffa2a6545a0af9de0645194e78f");
+            recyclerView = findViewById(R.id.search_recycler_view);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(SearchResultActivity.this));
+            listItems = new ArrayList<>();
+            adapter = new MyAdapter(listItems, SearchResultActivity.this);
 
 
-        recyclerView.setAdapter(adapter);
-        call.enqueue(new Callback<SearchArticleList>() {
-            @Override
-            public void onResponse(Call<SearchArticleList> call, retrofit2.Response<SearchArticleList> response) {
-                SearchArticleList articles = response.body();
-                SearchArticleFolder theListOfArticles = articles.getResponse();
+            Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
-                if (theListOfArticles != null) {
+            Api api = retrofit.create(Api.class);
 
-                    for (int i = 0; i < theListOfArticles.getDocs().size(); i++) {
-                        if (theListOfArticles.getDocs().get(i).getMultimedia().size() != 0) {
-                            ListItem listItem = new ListItem("",
-                                    "",
-                                    theListOfArticles.getDocs().get(i).getSnippet(),
-                                    theListOfArticles.getDocs().get(i).getPub_date(),
-                                    "http://www.nytimes.com/" + theListOfArticles.getDocs().get(i).getMultimedia().get(1).getUrl(),
-                                    theListOfArticles.getDocs().get(i).getWeb_url(),
-                                    SearchResultActivity.this);
-                            listItems.add(listItem);
-                        }
-                        else {
-                            ListItem listItem = new ListItem("",
-                                    "",
-                                    theListOfArticles.getDocs().get(i).getSnippet(),
-                                    theListOfArticles.getDocs().get(i).getPub_date(),
-                                    "https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/44686792_1020357278142901_5098647331683696640_n.jpg?_nc_cat=108&_nc_ht=scontent-cdg2-1.xx&oh=dc5de8b11cdc369b0240a420f09e2d2a&oe=5C5547E8".replace("https://", "http://"),
-                                    theListOfArticles.getDocs().get(i).getWeb_url(),
-                                    SearchResultActivity.this);
-                            listItems.add(listItem);
+            Call<SearchArticleList> call = null;
+
+            switch (categoriesSelected.size()){
+                case 0:
+                    call = api.getSearchArticles(searchQuery, "", theBeginDateString, theEndDateString, "5179fffa2a6545a0af9de0645194e78f");
+                    break;
+                case 1:
+                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0), theBeginDateString, theEndDateString, "5179fffa2a6545a0af9de0645194e78f");
+                    break;
+                case 2:
+                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1), theBeginDateString, theEndDateString, "5179fffa2a6545a0af9de0645194e78f");
+                    break;
+                case 3:
+                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2), theBeginDateString, theEndDateString, "5179fffa2a6545a0af9de0645194e78f");
+                    break;
+                case 4:
+                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2) + "," + categoriesSelected.get(3), theBeginDateString, theEndDateString, "5179fffa2a6545a0af9de0645194e78f");
+                    break;
+                case 5:
+                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2) + "," + categoriesSelected.get(3) + "," + categoriesSelected.get(4), theBeginDateString, theEndDateString, "5179fffa2a6545a0af9de0645194e78f");
+                    break;
+                case 6:
+                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2) + "," + categoriesSelected.get(3) + "," + categoriesSelected.get(4) + "," + categoriesSelected.get(5), theBeginDateString, theEndDateString , "5179fffa2a6545a0af9de0645194e78f");
+                    break;
+            }
+
+
+
+            recyclerView.setAdapter(adapter);
+            call.enqueue(new Callback<SearchArticleList>() {
+                @Override
+                public void onResponse(Call<SearchArticleList> call, retrofit2.Response<SearchArticleList> response) {
+                    SearchArticleList articles = response.body();
+                    SearchArticleFolder theListOfArticles = articles.getResponse();
+
+                    if (theListOfArticles != null) {
+
+                        for (int i = 0; i < theListOfArticles.getDocs().size(); i++) {
+                            if (theListOfArticles.getDocs().get(i).getMultimedia().size() != 0) {
+                                ListItem listItem = new ListItem("",
+                                        "",
+                                        theListOfArticles.getDocs().get(i).getSnippet(),
+                                        theListOfArticles.getDocs().get(i).getPub_date(),
+                                        "http://www.nytimes.com/" + theListOfArticles.getDocs().get(i).getMultimedia().get(1).getUrl(),
+                                        theListOfArticles.getDocs().get(i).getWeb_url(),
+                                        SearchResultActivity.this);
+                                listItems.add(listItem);
+                            } else {
+                                ListItem listItem = new ListItem("",
+                                        "",
+                                        theListOfArticles.getDocs().get(i).getSnippet(),
+                                        theListOfArticles.getDocs().get(i).getPub_date(),
+                                        "https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/44686792_1020357278142901_5098647331683696640_n.jpg?_nc_cat=108&_nc_ht=scontent-cdg2-1.xx&oh=dc5de8b11cdc369b0240a420f09e2d2a&oe=5C5547E8".replace("https://", "http://"),
+                                        theListOfArticles.getDocs().get(i).getWeb_url(),
+                                        SearchResultActivity.this);
+                                listItems.add(listItem);
+                            }
                         }
                     }
+                    adapter.notifyDataSetChanged();
                 }
-                adapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onFailure(Call<SearchArticleList> call, Throwable t) {
-                Toast.makeText(SearchResultActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                Log.d("JSON", t.getMessage());
-            }
-        });
+                @Override
+                public void onFailure(Call<SearchArticleList> call, Throwable t) {
+                    Toast.makeText(SearchResultActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.d("JSON", t.getMessage());
+                }
+            });
+        }
     }
+
 }
