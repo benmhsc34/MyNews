@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -145,6 +146,7 @@ public class SearchResultActivity extends AppCompatActivity {
                             DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                             DateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
                             String inputDateStr = theListOfArticles.getDocs().get(i).getPub_date();
+                            if (inputDateStr == null){inputDateStr = "2018-10-25T21:09:24";}
                             Date date = null;
                             try {
                                 date = inputFormat.parse(inputDateStr);
@@ -184,6 +186,13 @@ public class SearchResultActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: finish();
+        }
+        return true;
     }
 
 }

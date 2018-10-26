@@ -50,7 +50,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         final ListItem listItem = listItems.get(i);
 
         viewHolder.textViewSection.setText(listItem.getSection());
@@ -66,6 +66,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 Intent myIntent = new Intent(context, WebviewActivity.class);
                 myIntent.putExtra("websiteUrl", listItem.getUrlWebsite());
                 context.startActivity(myIntent);
+            //    viewHolder.relativeLayout.setBackgroundColor(R.color.colorPrimaryDark);
             }
         });
     }

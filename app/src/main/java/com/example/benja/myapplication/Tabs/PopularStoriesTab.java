@@ -1,5 +1,8 @@
 package com.example.benja.myapplication.Tabs;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,6 +34,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.support.v4.content.ContextCompat.getSystemService;
+
 public class PopularStoriesTab extends Fragment {
 
     private RecyclerView recyclerView;
@@ -39,6 +44,7 @@ public class PopularStoriesTab extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
 
         View rootView = inflater.inflate(R.layout.popular_stories_tab, container, false);
         recyclerView = rootView.findViewById(R.id.fragment_main_recycler_view);

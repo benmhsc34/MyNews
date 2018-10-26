@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -56,12 +57,24 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String searchQuery = searchEditText.getText().toString();
-                if (artsCB.isChecked()){categoriesSelected.add("arts");}
-                if (entrepreneursCB.isChecked()){categoriesSelected.add("entrepreneurs");}
-                if (businessCB.isChecked()){categoriesSelected.add("business");}
-                if (sportsCB.isChecked()){categoriesSelected.add("sports");}
-                if (travelCB.isChecked()){categoriesSelected.add("travel");}
-                if (politicsCB.isChecked()){categoriesSelected.add("politics");}
+                if (artsCB.isChecked()) {
+                    categoriesSelected.add("arts");
+                }
+                if (entrepreneursCB.isChecked()) {
+                    categoriesSelected.add("entrepreneurs");
+                }
+                if (businessCB.isChecked()) {
+                    categoriesSelected.add("business");
+                }
+                if (sportsCB.isChecked()) {
+                    categoriesSelected.add("sports");
+                }
+                if (travelCB.isChecked()) {
+                    categoriesSelected.add("travel");
+                }
+                if (politicsCB.isChecked()) {
+                    categoriesSelected.add("politics");
+                }
                 String theBeginDateString = beginDate[0];
                 String theEndDateString = theEndDate[0];
 
@@ -75,10 +88,9 @@ public class SearchActivity extends AppCompatActivity {
         });
 
 
-
         final Calendar myCalendar = Calendar.getInstance();
         //Date picker for the begin date
-        EditText edittext= findViewById(R.id.editTextBeginDate);
+        EditText edittext = findViewById(R.id.editTextBeginDate);
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -91,6 +103,7 @@ public class SearchActivity extends AppCompatActivity {
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateLabel();
             }
+
             private void updateLabel() {
                 String myFormat = "MM/dd/yyyy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -126,6 +139,7 @@ public class SearchActivity extends AppCompatActivity {
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateLabel();
             }
+
             private void updateLabel() {
                 String myFormat = "MM/dd/yyyy"; //In which you need put here
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -148,8 +162,17 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void hideKeyboard(View rootView) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+        }
+        return true;
     }
 
 }
