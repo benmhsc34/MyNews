@@ -3,6 +3,7 @@ package com.example.benja.myapplication.Toolbar;
 import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,5 +34,13 @@ public class HelpActivity extends AppCompatActivity {
                 " But if you do you should absolutely go ahead");
 
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+        }
+        return true;
     }
 }

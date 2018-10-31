@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -34,6 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NotificationActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
     EditText editText;
     CheckBox artsCB;
     CheckBox businessCB;
@@ -46,10 +48,63 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
     DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
     Date date = new Date();
 
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_notification);
+
+        editText = findViewById(R.id.editTextSearchNotification);
+        artsCB = findViewById(R.id.artsCB);
+        businessCB = findViewById(R.id.businessCB);
+        entrepreneursCB = findViewById(R.id.entrepreneursCB);
+        sportsCB = findViewById(R.id.sportsCB);
+        travelCB = findViewById(R.id.travelCB);
+        politicsCB = findViewById(R.id.politicsCB);
+
+        Switch notificationSwitch = findViewById(R.id.notificationSwitch);
+
+        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+        if (artsCB.isChecked()) {
+            editor.putBoolean("isArtsChecked", true);
+            editor.apply();
+        } else {
+            editor.putBoolean("isArtsChecked", false);
+            editor.apply();
+        }
+
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        boolean isChecked = prefs.getBoolean("isChecked", false);
+        boolean isArtsChecked = prefs.getBoolean("isArtsChecked", false);
+        boolean isBusinessChecked = prefs.getBoolean("isBusinessChecked", false);
+        boolean isSportsChecked = prefs.getBoolean("isSportsChecked", false);
+        boolean isEntrepreneursChecked = prefs.getBoolean("isEntrepreneursChecked", false);
+        boolean isPoliticsChecked = prefs.getBoolean("isPoliticsChecked", false);
+        boolean isTravelChecked = prefs.getBoolean("isTravelChecked", false);
+
+        artsCB.setChecked(isArtsChecked);
+        sportsCB.setChecked(isSportsChecked);
+        travelCB.setChecked(isTravelChecked);
+        businessCB.setChecked(isBusinessChecked);
+        entrepreneursCB.setChecked(isEntrepreneursChecked);
+        politicsCB.setChecked(isPoliticsChecked);
+
+        if (notificationSwitch != null) {
+            notificationSwitch.setOnCheckedChangeListener(this);
+            notificationSwitch.setChecked(isChecked);
+        }
+
+    }
+
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        Toast.makeText(this, "The Switch is " + (isChecked ? "on" : "off"),
-                Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Notifications are " + (isChecked ? "on" : "off"), Toast.LENGTH_SHORT).show();
+
+        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putBoolean("isChecked", isChecked);
+        editor.apply();
+
         if (isChecked) {
+
             String searchQuery = editText.getText().toString();
             if (artsCB.isChecked()) {
                 categoriesSelected.add("arts");
@@ -92,31 +147,6 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notification);
-
-        editText = findViewById(R.id.editTextSearchNotification);
-        artsCB = findViewById(R.id.artsCB);
-        businessCB = findViewById(R.id.businessCB);
-        entrepreneursCB = findViewById(R.id.entrepreneursCB);
-        sportsCB = findViewById(R.id.sportsCB);
-        travelCB = findViewById(R.id.travelCB);
-        politicsCB = findViewById(R.id.politicsCB);
-
-        Switch notificationSwitch = findViewById(R.id.notificationSwitch);
-
-        if (notificationSwitch != null) {
-            notificationSwitch.setOnCheckedChangeListener(this);
-
-        }
-
-
-
-
-
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
