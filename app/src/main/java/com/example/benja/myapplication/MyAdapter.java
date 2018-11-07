@@ -28,11 +28,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private Context context;
     private OnItemClickListener mListener;
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
 
@@ -55,7 +55,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         viewHolder.textViewSection.setText(listItem.getSection());
         viewHolder.textViewSubsection.setText(listItem.getSubsection());
-        if (listItem.getSubsection().equals("")){viewHolder.specificTextView.setVisibility(View.INVISIBLE);}
+        if (listItem.getSubsection().equals("")) {
+            viewHolder.specificTextView.setVisibility(View.INVISIBLE);
+        } else {
+            viewHolder.specificTextView.setVisibility(View.VISIBLE);
+        }
         viewHolder.textViewTitle.setText(listItem.getDesc());
         viewHolder.textViewDate.setText(listItem.getDate());
         Picasso.with(context).load(listItem.getUrlImage()).into(viewHolder.imageViewPic);
@@ -66,7 +70,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 Intent myIntent = new Intent(context, WebviewActivity.class);
                 myIntent.putExtra("websiteUrl", listItem.getUrlWebsite());
                 context.startActivity(myIntent);
-            //    viewHolder.relativeLayout.setBackgroundColor(R.color.colorPrimaryDark);
+                //    viewHolder.relativeLayout.setBackgroundColor(R.color.colorPrimaryDark);
             }
         });
     }
@@ -86,7 +90,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public RelativeLayout relativeLayout;
 
 
-
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
@@ -104,9 +107,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (mListener != null){
+                    if (mListener != null) {
                         int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION);{
+                        if (position != RecyclerView.NO_POSITION) ;
+                        {
                             mListener.onItemClick(position);
                         }
                     }

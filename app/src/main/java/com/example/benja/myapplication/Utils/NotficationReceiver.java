@@ -38,8 +38,6 @@ public class NotficationReceiver extends BroadcastReceiver {
         if(action.equals("my.action.string")){
             searchQuery = intent.getExtras().getString("searchQuery","");
             categoriesSelected = intent.getStringArrayListExtra("categoriesSelected");
-
-
         }
 
         Log.d("asdf","my time worked");

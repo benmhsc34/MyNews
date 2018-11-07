@@ -7,7 +7,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AbsListView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -53,8 +57,8 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
-
         editText = findViewById(R.id.editTextSearchNotification);
+
         artsCB = findViewById(R.id.artsCB);
         businessCB = findViewById(R.id.businessCB);
         entrepreneursCB = findViewById(R.id.entrepreneursCB);
@@ -64,17 +68,10 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
 
         Switch notificationSwitch = findViewById(R.id.notificationSwitch);
 
-        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-        if (artsCB.isChecked()) {
-            editor.putBoolean("isArtsChecked", true);
-            editor.apply();
-        } else {
-            editor.putBoolean("isArtsChecked", false);
-            editor.apply();
-        }
+        final SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-        boolean isChecked = prefs.getBoolean("isChecked", false);
+        final boolean isChecked = prefs.getBoolean("isChecked", false);
         boolean isArtsChecked = prefs.getBoolean("isArtsChecked", false);
         boolean isBusinessChecked = prefs.getBoolean("isBusinessChecked", false);
         boolean isSportsChecked = prefs.getBoolean("isSportsChecked", false);
@@ -82,19 +79,85 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
         boolean isPoliticsChecked = prefs.getBoolean("isPoliticsChecked", false);
         boolean isTravelChecked = prefs.getBoolean("isTravelChecked", false);
 
+
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                editor.putString("editTextNotification", editText.getText().toString());
+                editor.apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                editor.putString("editTextNotification", editText.getText().toString());
+                editor.apply();
+            }
+        });
+        String editTextValue = prefs.getString("editTextNotification", "");
+        editText.setText(editTextValue);
+
         artsCB.setChecked(isArtsChecked);
+        artsCB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                editor.putBoolean("isArtsChecked", b);
+                editor.apply();
+            }
+        });
+
         sportsCB.setChecked(isSportsChecked);
+        sportsCB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                editor.putBoolean("isSportsChecked", b);
+                editor.apply();
+            }
+        });
         travelCB.setChecked(isTravelChecked);
+        travelCB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                editor.putBoolean("isTravelChecked", b);
+                editor.apply();
+            }
+        });
         businessCB.setChecked(isBusinessChecked);
+        businessCB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                editor.putBoolean("isBusinessChecked", b);
+                editor.apply();
+            }
+        });
         entrepreneursCB.setChecked(isEntrepreneursChecked);
+        entrepreneursCB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                editor.putBoolean("isEntrepreneursChecked", b);
+                editor.apply();
+            }
+        });
         politicsCB.setChecked(isPoliticsChecked);
+        politicsCB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                editor.putBoolean("isPoliticsChecked", b);
+                editor.apply();
+            }
+        });
 
         if (notificationSwitch != null) {
             notificationSwitch.setOnCheckedChangeListener(this);
             notificationSwitch.setChecked(isChecked);
         }
-
     }
+
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         Toast.makeText(this, "Notifications are " + (isChecked ? "on" : "off"), Toast.LENGTH_SHORT).show();
@@ -106,6 +169,8 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
         if (isChecked) {
 
             String searchQuery = editText.getText().toString();
+
+
             if (artsCB.isChecked()) {
                 categoriesSelected.add("arts");
             }
@@ -161,4 +226,5 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
 }
