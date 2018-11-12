@@ -1,10 +1,5 @@
 package com.example.benja.myapplication;
 
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -27,11 +22,6 @@ import com.example.benja.myapplication.Toolbar.AboutActivity;
 import com.example.benja.myapplication.Toolbar.HelpActivity;
 import com.example.benja.myapplication.Toolbar.NotificationActivity;
 import com.example.benja.myapplication.Toolbar.SearchActivity;
-import com.example.benja.myapplication.Utils.NotficationReceiver;
-
-import java.util.Calendar;
-
-import static android.support.v4.content.ContextCompat.getSystemService;
 
 public class MainActivity extends AppCompatActivity {
 

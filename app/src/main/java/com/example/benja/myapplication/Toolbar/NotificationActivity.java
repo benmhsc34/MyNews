@@ -5,13 +5,13 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AbsListView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -19,10 +19,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.benja.myapplication.R;
-import com.example.benja.myapplication.Utils.Api;
-import com.example.benja.myapplication.Utils.NotficationReceiver;
-import com.example.benja.myapplication.Utils.Search_API.SearchArticleFolder;
-import com.example.benja.myapplication.Utils.Search_API.SearchArticleList;
+import com.example.benja.myapplication.NotficationReceiver;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -31,13 +28,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
 public class NotificationActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
+
 
     public static final String MY_PREFS_NAME = "MyPrefsFile";
     EditText editText;
@@ -53,12 +45,13 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
     Date date = new Date();
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
-        editText = findViewById(R.id.editTextSearchNotification);
 
+        editText = findViewById(R.id.editTextSearchNotification);
         artsCB = findViewById(R.id.artsCB);
         businessCB = findViewById(R.id.businessCB);
         entrepreneursCB = findViewById(R.id.entrepreneursCB);
@@ -78,7 +71,6 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
         boolean isEntrepreneursChecked = prefs.getBoolean("isEntrepreneursChecked", false);
         boolean isPoliticsChecked = prefs.getBoolean("isPoliticsChecked", false);
         boolean isTravelChecked = prefs.getBoolean("isTravelChecked", false);
-
 
 
         editText.addTextChangedListener(new TextWatcher() {
@@ -156,15 +148,6 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
             notificationSwitch.setOnCheckedChangeListener(this);
             notificationSwitch.setChecked(isChecked);
         }
-    }
-
-
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        Toast.makeText(this, "Notifications are " + (isChecked ? "on" : "off"), Toast.LENGTH_SHORT).show();
-
-        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-        editor.putBoolean("isChecked", isChecked);
-        editor.apply();
 
         if (isChecked) {
 
@@ -193,8 +176,8 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
             //Setting Notification Receiver for user to receive daily notifications if new relevant articles have been released
             Calendar calendar = Calendar.getInstance();
 
-            calendar.set(Calendar.HOUR_OF_DAY, 5);
-            calendar.set(Calendar.MINUTE, 52);
+            calendar.set(Calendar.HOUR_OF_DAY, 11);
+            calendar.set(Calendar.MINUTE, 50);
             calendar.set(Calendar.SECOND, 12);
 
             Intent myIntent = new Intent(getApplicationContext(), NotficationReceiver.class);
@@ -209,7 +192,58 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
             sendBroadcast(intent);
 
         }
+    }
 
+
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        Toast.makeText(this, "Notifications are " + (isChecked ? "on" : "off"), Toast.LENGTH_SHORT).show();
+
+        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putBoolean("isChecked", isChecked);
+        editor.apply();
+
+        if (isChecked) {
+
+            String searchQuery = editText.getText().toString();
+
+            if (artsCB.isChecked()) {
+                categoriesSelected.add("arts");
+            }
+            if (entrepreneursCB.isChecked()) {
+                categoriesSelected.add("entrepreneurs");
+            }
+            if (businessCB.isChecked()) {
+                categoriesSelected.add("business");
+            }
+            if (sportsCB.isChecked()) {
+                categoriesSelected.add("sports");
+            }
+            if (travelCB.isChecked()) {
+                categoriesSelected.add("travel");
+            }
+            if (politicsCB.isChecked()) {
+                categoriesSelected.add("politics");
+            }
+
+            //Setting Notification Receiver for user to receive daily notifications if new relevant articles have been released
+            Calendar calendar = Calendar.getInstance();
+
+            calendar.set(Calendar.HOUR_OF_DAY, 13);
+            calendar.set(Calendar.MINUTE, 25);
+            calendar.set(Calendar.SECOND, 12);
+
+            Intent myIntent = new Intent(getApplicationContext(), NotficationReceiver.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            assert alarmManager != null;
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+
+            Intent intent = new Intent("my.action.string");
+            intent.putExtra("searchQuery", searchQuery);
+            intent.putExtra("categoriesSelected", (ArrayList) categoriesSelected);
+            sendBroadcast(intent);
+
+        }
     }
 
 
