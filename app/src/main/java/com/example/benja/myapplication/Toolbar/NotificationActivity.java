@@ -176,8 +176,8 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
             //Setting Notification Receiver for user to receive daily notifications if new relevant articles have been released
             Calendar calendar = Calendar.getInstance();
 
-            calendar.set(Calendar.HOUR_OF_DAY, 11);
-            calendar.set(Calendar.MINUTE, 50);
+            calendar.set(Calendar.HOUR_OF_DAY, 21);
+            calendar.set(Calendar.MINUTE, 37);
             calendar.set(Calendar.SECOND, 12);
 
             Intent myIntent = new Intent(getApplicationContext(), NotficationReceiver.class);
@@ -186,10 +186,10 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
             assert alarmManager != null;
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 
-            Intent intent = new Intent("my.action.string");
+          /*  Intent intent = new Intent("my.action.string");
             intent.putExtra("searchQuery", searchQuery);
             intent.putExtra("categoriesSelected", (ArrayList) categoriesSelected);
-            sendBroadcast(intent);
+            sendBroadcast(intent); */
 
         }
     }

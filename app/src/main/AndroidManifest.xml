@@ -4,7 +4,7 @@
     package="com.example.benja.myapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -28,8 +28,14 @@
 
         </activity>
 
-        <activity android:name=".RepeatingActivity"/>
-        <receiver android:name=".NotficationReceiver"/>
+        <activity android:name=".RepeatingActivity" />
+
+        <receiver
+            android:name=".NotficationReceiver">
+            <intent-filter>
+                <action android:name="my.action.string" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".Toolbar.HelpActivity"
@@ -45,19 +51,10 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Toolbar.SearchResultActivity"
-            android:parentActivityName=".Toolbar.SearchActivity"/>
+            android:parentActivityName=".Toolbar.SearchActivity" />
         <activity
             android:name=".Toolbar.NotificationActivity"
-            android:parentActivityName=".MainActivity"/>
-
-
-
-
-
-
-
-
-
+            android:parentActivityName=".MainActivity" />
 
 
     </application>
