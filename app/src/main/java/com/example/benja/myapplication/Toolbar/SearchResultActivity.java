@@ -133,58 +133,60 @@ public class SearchResultActivity extends AppCompatActivity {
 
 
             recyclerView.setAdapter(adapter);
-            call.enqueue(new Callback<SearchArticleList>() {
-                @Override
-                public void onResponse(Call<SearchArticleList> call, retrofit2.Response<SearchArticleList> response) {
-                    SearchArticleList articles = response.body();
-                    SearchArticleFolder theListOfArticles = articles.getResponse();
+            if (call != null) {
+                call.enqueue(new Callback<SearchArticleList>() {
+                    @Override
+                    public void onResponse(Call<SearchArticleList> call, Response<SearchArticleList> response) {
+                        SearchArticleList articles = response.body();
+                        SearchArticleFolder theListOfArticles = articles.getResponse();
 
-                    if (theListOfArticles != null) {
+                        if (theListOfArticles != null) {
 
-                        for (int i = 0; i < theListOfArticles.getDocs().size(); i++) {
+                            for (int i = 0; i < theListOfArticles.getDocs().size(); i++) {
 
-                            DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                            DateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
-                            String inputDateStr = theListOfArticles.getDocs().get(i).getPub_date();
-                            if (inputDateStr == null){inputDateStr = "2018-10-25T21:09:24";}
-                            Date date = null;
-                            try {
-                                date = inputFormat.parse(inputDateStr);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-                            String outputDateStr = outputFormat.format(date);
+                                DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                                DateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
+                                String inputDateStr = theListOfArticles.getDocs().get(i).getPub_date();
+                                if (inputDateStr == null){inputDateStr = "2018-10-25T21:09:24";}
+                                Date date = null;
+                                try {
+                                    date = inputFormat.parse(inputDateStr);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                String outputDateStr = outputFormat.format(date);
 
-                            if (theListOfArticles.getDocs().get(i).getMultimedia().size() != 0) {
-                                ListItem listItem = new ListItem("",
-                                        "",
-                                        theListOfArticles.getDocs().get(i).getSnippet(),
-                                        outputDateStr,
-                                        "http://www.nytimes.com/" + theListOfArticles.getDocs().get(i).getMultimedia().get(1).getUrl(),
-                                        theListOfArticles.getDocs().get(i).getWeb_url(),
-                                        SearchResultActivity.this);
-                                listItems.add(listItem);
-                            } else {
-                                ListItem listItem = new ListItem("",
-                                        "",
-                                        theListOfArticles.getDocs().get(i).getSnippet(),
-                                        outputDateStr,
-                                        "https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/44686792_1020357278142901_5098647331683696640_n.jpg?_nc_cat=108&_nc_ht=scontent-cdg2-1.xx&oh=dc5de8b11cdc369b0240a420f09e2d2a&oe=5C5547E8".replace("https://", "http://"),
-                                        theListOfArticles.getDocs().get(i).getWeb_url(),
-                                        SearchResultActivity.this);
-                                listItems.add(listItem);
+                                if (theListOfArticles.getDocs().get(i).getMultimedia().size() != 0) {
+                                    ListItem listItem = new ListItem("",
+                                            "",
+                                            theListOfArticles.getDocs().get(i).getSnippet(),
+                                            outputDateStr,
+                                            "http://www.nytimes.com/" + theListOfArticles.getDocs().get(i).getMultimedia().get(0).getUrl(),
+                                            theListOfArticles.getDocs().get(i).getWeb_url(),
+                                            SearchResultActivity.this);
+                                    listItems.add(listItem);
+                                } else {
+                                    ListItem listItem = new ListItem("",
+                                            "",
+                                            theListOfArticles.getDocs().get(i).getSnippet(),
+                                            outputDateStr,
+                                            "https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/44686792_1020357278142901_5098647331683696640_n.jpg?_nc_cat=108&_nc_ht=scontent-cdg2-1.xx&oh=dc5de8b11cdc369b0240a420f09e2d2a&oe=5C5547E8".replace("https://", "http://"),
+                                            theListOfArticles.getDocs().get(i).getWeb_url(),
+                                            SearchResultActivity.this);
+                                    listItems.add(listItem);
+                                }
                             }
                         }
+                        adapter.notifyDataSetChanged();
                     }
-                    adapter.notifyDataSetChanged();
-                }
 
-                @Override
-                public void onFailure(Call<SearchArticleList> call, Throwable t) {
-                    Toast.makeText(SearchResultActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.d("JSON", t.getMessage());
-                }
-            });
+                    @Override
+                    public void onFailure(Call<SearchArticleList> call, Throwable t) {
+                        Toast.makeText(SearchResultActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.d("JSON", t.getMessage());
+                    }
+                });
+            }
         }
     }
     @Override

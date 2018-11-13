@@ -25,6 +25,7 @@ import java.util.Locale;
 
 public class SearchActivity extends AppCompatActivity {
 
+    List<String> categoriesSelected = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +38,7 @@ public class SearchActivity extends AppCompatActivity {
         final CheckBox sportsCB = findViewById(R.id.sportsCB);
         final CheckBox travelCB = findViewById(R.id.travelCB);
         final CheckBox politicsCB = findViewById(R.id.politicsCB);
-        final List<String> categoriesSelected = new ArrayList<>();
+
         final String[] beginDate = new String[1];
         final String[] theEndDate = new String[1];
 
@@ -57,6 +58,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String searchQuery = searchEditText.getText().toString();
+
                 if (artsCB.isChecked()) {
                     categoriesSelected.add("arts");
                 }
