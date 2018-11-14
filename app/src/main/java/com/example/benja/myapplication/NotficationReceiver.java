@@ -20,6 +20,7 @@ import com.example.benja.myapplication.Utils.Search_API.SearchArticleList;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,39 +36,35 @@ import static com.example.benja.myapplication.Toolbar.NotificationActivity.MY_PR
 
 public class NotficationReceiver extends BroadcastReceiver {
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(final Context context, Intent intent) {
 
         Log.d("asdf", "my time worked");
         SharedPreferences prefs = context.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        final NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
 
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                .setContentIntent(pendingIntent)
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentTitle("Notif Title")
-                .setContentText("Notif Text")
-                .setAutoCancel(true);
-        notificationManager.notify(100, builder.build());
+        final PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
-        String action = intent.getAction();
-        List<String> categoriesSelected = null;
+     //   String action = intent.getAction();
+        ArrayList<String>categoriesSelected = new ArrayList<>();
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         Date date = new Date();
         String searchQuery = prefs.getString("editTextNotification", "");
+        Boolean artsCB = prefs.getBoolean("isArtsChecked", false);
+        Boolean politicsCB = prefs.getBoolean("isPoliticsChecked", false);
+        Boolean entrepreneursCB = prefs.getBoolean("isEntrepreneursChecked", false);
+        Boolean travelCB = prefs.getBoolean("isTravelChecked", false);
+        Boolean sportsCB = prefs.getBoolean("isSportsChecked", false);
+        Boolean businessCB = prefs.getBoolean("isBusinessChecked", false);
 
-
-        if (action.equals("my.action.string")) {
-            categoriesSelected = intent.getStringArrayListExtra("categoriesSelected");
-        }
-
-
-
+        if (artsCB){categoriesSelected.add("arts");}
+        if (politicsCB){categoriesSelected.add("politics");}
+        if (entrepreneursCB){categoriesSelected.add("entrepreneurs");}
+        if (travelCB){categoriesSelected.add("travel");}
+        if (sportsCB){categoriesSelected.add("sports");}
+        if (businessCB){categoriesSelected.add("business");}
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
@@ -99,21 +96,29 @@ public class NotficationReceiver extends BroadcastReceiver {
                 break;
         }
 
-        call.enqueue(new Callback<SearchArticleList>() {
-            @Override
-            public void onResponse(Call<SearchArticleList> call, Response<SearchArticleList> response) {
-                SearchArticleList articles = response.body();
-                SearchArticleFolder theListOfArticles = articles.getResponse();
-                if (theListOfArticles.getDocs().size() != 0) {
+        if (call != null) {
+            call.enqueue(new Callback<SearchArticleList>() {
+                @Override
+                public void onResponse(Call<SearchArticleList> call, Response<SearchArticleList> response) {
+                    SearchArticleList articles = response.body();
+                    SearchArticleFolder theListOfArticles = articles.getResponse();
+               //     if (theListOfArticles.getDocs().size() != 0) {
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+                                .setContentIntent(pendingIntent)
+                                .setSmallIcon(R.drawable.mn)
+                                .setContentTitle("My News")
+                                .setContentText("Your articles of the day are ready")
+                                .setAutoCancel(true);
+                        notificationManager.notify(100, builder.build());
+                 //   }
+                }
+
+                @Override
+                public void onFailure(Call<SearchArticleList> call, Throwable t) {
 
                 }
-            }
-
-            @Override
-            public void onFailure(Call<SearchArticleList> call, Throwable t) {
-
-            }
-        });
+            });
+        }
 
 
     }

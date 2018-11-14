@@ -151,33 +151,11 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
 
         if (isChecked) {
 
-            String searchQuery = editText.getText().toString();
-
-
-            if (artsCB.isChecked()) {
-                categoriesSelected.add("arts");
-            }
-            if (entrepreneursCB.isChecked()) {
-                categoriesSelected.add("entrepreneurs");
-            }
-            if (businessCB.isChecked()) {
-                categoriesSelected.add("business");
-            }
-            if (sportsCB.isChecked()) {
-                categoriesSelected.add("sports");
-            }
-            if (travelCB.isChecked()) {
-                categoriesSelected.add("travel");
-            }
-            if (politicsCB.isChecked()) {
-                categoriesSelected.add("politics");
-            }
-
             //Setting Notification Receiver for user to receive daily notifications if new relevant articles have been released
             Calendar calendar = Calendar.getInstance();
 
-            calendar.set(Calendar.HOUR_OF_DAY, 16);
-            calendar.set(Calendar.MINUTE, 17);
+            calendar.set(Calendar.HOUR_OF_DAY, 2);
+            calendar.set(Calendar.MINUTE, 34);
             calendar.set(Calendar.SECOND, 30);
 
             Intent myIntent = new Intent(getApplicationContext(), NotficationReceiver.class);
@@ -202,48 +180,7 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
         editor.putBoolean("isChecked", isChecked);
         editor.apply();
 
-        if (isChecked) {
 
-            String searchQuery = editText.getText().toString();
-
-            if (artsCB.isChecked()) {
-                categoriesSelected.add("arts");
-            }
-            if (entrepreneursCB.isChecked()) {
-                categoriesSelected.add("entrepreneurs");
-            }
-            if (businessCB.isChecked()) {
-                categoriesSelected.add("business");
-            }
-            if (sportsCB.isChecked()) {
-                categoriesSelected.add("sports");
-            }
-            if (travelCB.isChecked()) {
-                categoriesSelected.add("travel");
-            }
-            if (politicsCB.isChecked()) {
-                categoriesSelected.add("politics");
-            }
-
-            //Setting Notification Receiver for user to receive daily notifications if new relevant articles have been released
-            Calendar calendar = Calendar.getInstance();
-
-            calendar.set(Calendar.HOUR_OF_DAY, 13);
-            calendar.set(Calendar.MINUTE, 25);
-            calendar.set(Calendar.SECOND, 12);
-
-            Intent myIntent = new Intent(getApplicationContext(), NotficationReceiver.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            assert alarmManager != null;
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-
-            Intent intent = new Intent("my.action.string");
-            intent.putExtra("searchQuery", searchQuery);
-            intent.putExtra("categoriesSelected", (ArrayList) categoriesSelected);
-            sendBroadcast(intent);
-
-        }
     }
 
 

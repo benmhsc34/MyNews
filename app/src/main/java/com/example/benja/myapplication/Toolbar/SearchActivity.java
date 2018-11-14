@@ -80,12 +80,16 @@ public class SearchActivity extends AppCompatActivity {
                 String theBeginDateString = beginDate[0];
                 String theEndDateString = theEndDate[0];
 
+
+
                 Intent myIntent = new Intent(SearchActivity.this, SearchResultActivity.class);
                 myIntent.putExtra("searchQuery", searchQuery);
                 myIntent.putExtra("categoriesSelected", (ArrayList) categoriesSelected);
                 myIntent.putExtra("theBeginDateString", theBeginDateString);
                 myIntent.putExtra("theEndDateString", theEndDateString);
                 SearchActivity.this.startActivity(myIntent);
+
+                categoriesSelected.clear();
             }
         });
 
