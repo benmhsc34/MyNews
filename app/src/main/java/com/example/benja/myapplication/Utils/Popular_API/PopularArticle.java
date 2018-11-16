@@ -5,12 +5,13 @@ import java.util.List;
 
 public class PopularArticle {
 
-    String url;
-    String section;
-    String title;
-    @SerializedName("abstract") String description;
-    String published_date;
-    List<PopularArticleImagesFolder> media;
+    private String url;
+    private String section;
+    private String title;
+    @SerializedName("abstract")
+    private String description;
+    private String published_date;
+    private List<PopularArticleImagesFolder> media;
 
 
     public String getUrl() {

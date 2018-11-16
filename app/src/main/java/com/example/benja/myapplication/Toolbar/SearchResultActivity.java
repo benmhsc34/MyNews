@@ -105,31 +105,10 @@ public class SearchResultActivity extends AppCompatActivity {
 
             Api api = retrofit.create(Api.class);
 
-            Call<SearchArticleList> call = null;
+            Call<SearchArticleList> call;
 
-            switch (categoriesSelected.size()) {
-                case 0:
-                    call = api.getSearchArticles(searchQuery, "", outputDateStr, endOutputDateStr, "5179fffa2a6545a0af9de0645194e78f");
-                    break;
-                case 1:
-                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0), outputDateStr, endOutputDateStr, "5179fffa2a6545a0af9de0645194e78f");
-                    break;
-                case 2:
-                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1), outputDateStr, endOutputDateStr, "5179fffa2a6545a0af9de0645194e78f");
-                    break;
-                case 3:
-                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2), outputDateStr, endOutputDateStr, "5179fffa2a6545a0af9de0645194e78f");
-                    break;
-                case 4:
-                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2) + "," + categoriesSelected.get(3), outputDateStr, endOutputDateStr, "5179fffa2a6545a0af9de0645194e78f");
-                    break;
-                case 5:
-                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2) + "," + categoriesSelected.get(3) + "," + categoriesSelected.get(4), outputDateStr, endOutputDateStr, "5179fffa2a6545a0af9de0645194e78f");
-                    break;
-                case 6:
-                    call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2) + "," + categoriesSelected.get(3) + "," + categoriesSelected.get(4) + "," + categoriesSelected.get(5), outputDateStr, endOutputDateStr, "5179fffa2a6545a0af9de0645194e78f");
-                    break;
-            }
+
+            call = api.getSearchArticles(searchQuery, categoriesSelected.toString().replace("[", "").replace("]", ""), outputDateStr, endOutputDateStr, "5179fffa2a6545a0af9de0645194e78f");
 
 
             recyclerView.setAdapter(adapter);
@@ -147,7 +126,9 @@ public class SearchResultActivity extends AppCompatActivity {
                                 DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                                 DateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
                                 String inputDateStr = theListOfArticles.getDocs().get(i).getPub_date();
-                                if (inputDateStr == null){inputDateStr = "2018-10-25T21:09:24";}
+                                if (inputDateStr == null) {
+                                    inputDateStr = "2018-10-25T21:09:24";
+                                }
                                 Date date = null;
                                 try {
                                     date = inputFormat.parse(inputDateStr);
@@ -189,10 +170,12 @@ public class SearchResultActivity extends AppCompatActivity {
             }
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home: finish();
+            case android.R.id.home:
+                finish();
         }
         return true;
     }

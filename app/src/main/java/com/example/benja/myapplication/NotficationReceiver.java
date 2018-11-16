@@ -2,12 +2,14 @@ package com.example.benja.myapplication;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -47,8 +49,8 @@ public class NotficationReceiver extends BroadcastReceiver {
         final PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
-     //   String action = intent.getAction();
-        ArrayList<String>categoriesSelected = new ArrayList<>();
+        //   String action = intent.getAction();
+        ArrayList<String> categoriesSelected = new ArrayList<>();
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         Date date = new Date();
         String searchQuery = prefs.getString("editTextNotification", "");
@@ -59,42 +61,33 @@ public class NotficationReceiver extends BroadcastReceiver {
         Boolean sportsCB = prefs.getBoolean("isSportsChecked", false);
         Boolean businessCB = prefs.getBoolean("isBusinessChecked", false);
 
-        if (artsCB){categoriesSelected.add("arts");}
-        if (politicsCB){categoriesSelected.add("politics");}
-        if (entrepreneursCB){categoriesSelected.add("entrepreneurs");}
-        if (travelCB){categoriesSelected.add("travel");}
-        if (sportsCB){categoriesSelected.add("sports");}
-        if (businessCB){categoriesSelected.add("business");}
+        if (artsCB) {
+            categoriesSelected.add("arts");
+        }
+        if (politicsCB) {
+            categoriesSelected.add("politics");
+        }
+        if (entrepreneursCB) {
+            categoriesSelected.add("entrepreneurs");
+        }
+        if (travelCB) {
+            categoriesSelected.add("travel");
+        }
+        if (sportsCB) {
+            categoriesSelected.add("sports");
+        }
+        if (businessCB) {
+            categoriesSelected.add("business");
+        }
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
         Api api = retrofit.create(Api.class);
 
-        Call<SearchArticleList> call = null;
+        Call<SearchArticleList> call;
 
-        switch (categoriesSelected.size()) {
-            case 0:
-                call = api.getSearchArticles(searchQuery, "", dateFormat.format(date), null, "5179fffa2a6545a0af9de0645194e78f");
-                break;
-            case 1:
-                call = api.getSearchArticles(searchQuery, categoriesSelected.get(0), dateFormat.format(date), null, "5179fffa2a6545a0af9de0645194e78f");
-                break;
-            case 2:
-                call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1), dateFormat.format(date), null, "5179fffa2a6545a0af9de0645194e78f");
-                break;
-            case 3:
-                call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2), dateFormat.format(date), null, "5179fffa2a6545a0af9de0645194e78f");
-                break;
-            case 4:
-                call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2) + "," + categoriesSelected.get(3), dateFormat.format(date), null, "5179fffa2a6545a0af9de0645194e78f");
-                break;
-            case 5:
-                call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2) + "," + categoriesSelected.get(3) + "," + categoriesSelected.get(4), dateFormat.format(date), null, "5179fffa2a6545a0af9de0645194e78f");
-                break;
-            case 6:
-                call = api.getSearchArticles(searchQuery, categoriesSelected.get(0) + "," + categoriesSelected.get(1) + "," + categoriesSelected.get(2) + "," + categoriesSelected.get(3) + "," + categoriesSelected.get(4) + "," + categoriesSelected.get(5), dateFormat.format(date), null, "5179fffa2a6545a0af9de0645194e78f");
-                break;
-        }
+        call = api.getSearchArticles(searchQuery, categoriesSelected.toString().replace("[", "").replace("]", ""), dateFormat.format(date), null, "5179fffa2a6545a0af9de0645194e78f");
+
 
         if (call != null) {
             call.enqueue(new Callback<SearchArticleList>() {
@@ -102,15 +95,38 @@ public class NotficationReceiver extends BroadcastReceiver {
                 public void onResponse(Call<SearchArticleList> call, Response<SearchArticleList> response) {
                     SearchArticleList articles = response.body();
                     SearchArticleFolder theListOfArticles = articles.getResponse();
-               //     if (theListOfArticles.getDocs().size() != 0) {
-                        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                                .setContentIntent(pendingIntent)
-                                .setSmallIcon(R.drawable.mn)
-                                .setContentTitle("My News")
-                                .setContentText("Your articles of the day are ready")
-                                .setAutoCancel(true);
-                        notificationManager.notify(100, builder.build());
-                 //   }
+                    if (theListOfArticles.getDocs().size() != 0) {
+                        if (Build.VERSION.SDK_INT <= 25) {
+                            NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+                                    .setContentIntent(pendingIntent)
+                                    .setSmallIcon(R.drawable.mn)
+                                    .setContentTitle("My News")
+                                    .setContentText("Your articles of the day are ready")
+                                    .setAutoCancel(true);
+                            notificationManager.notify(100, builder.build());
+                        } else {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+                                /* Create or update. */
+                                NotificationChannel channel = new NotificationChannel("my_channel_01",
+                                        "Channel human readable title",
+                                        NotificationManager.IMPORTANCE_DEFAULT);
+                                //         mNotificationManager.createNotificationChannel(channel);
+                            }
+                            int notifyID = 1;
+                            String CHANNEL_ID = "my_channel_01";// The id of the channel.
+                            CharSequence name = ("channel_name");// The user-visible name of the channel.
+                            int importance = NotificationManager.IMPORTANCE_HIGH;
+                            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+                            // Create a notification and set the notification channel.
+                            Notification notification = new Notification.Builder(context)
+                                    .setContentTitle("New Message")
+                                    .setContentText("You've received new messages.")
+                                    .setSmallIcon(R.drawable.mn)
+                                    .setChannelId(CHANNEL_ID)
+                                    .build();
+                        }
+                    }
                 }
 
                 @Override

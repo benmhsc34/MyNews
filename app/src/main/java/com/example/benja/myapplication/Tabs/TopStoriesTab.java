@@ -31,13 +31,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
 
 
 public class TopStoriesTab extends Fragment {
 
     private RecyclerView.Adapter adapter;
     private List<ListItem> listItems;
-    public SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
