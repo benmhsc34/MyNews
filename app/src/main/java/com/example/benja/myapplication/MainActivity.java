@@ -1,7 +1,10 @@
 package com.example.benja.myapplication;
 
+import android.app.Notification;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -22,6 +25,9 @@ import com.example.benja.myapplication.Toolbar.AboutActivity;
 import com.example.benja.myapplication.Toolbar.HelpActivity;
 import com.example.benja.myapplication.Toolbar.NotificationActivity;
 import com.example.benja.myapplication.Toolbar.SearchActivity;
+
+import static android.app.Notification.CATEGORY_MESSAGE;
+import static com.example.benja.myapplication.MyNews.CHANNEL_1_ID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-      
+
 
         ImageView searchIcon = findViewById(R.id.searchIcon);
         searchIcon.setOnClickListener(new View.OnClickListener() {

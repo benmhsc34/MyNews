@@ -86,7 +86,7 @@ public class PopularStoriesTab extends Fragment {
                                 "",
                                 theListOfArticles.get(i).getTitle(),
                                 outputDateStr,
-                                "https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/44686792_1020357278142901_5098647331683696640_n.jpg?_nc_cat=108&_nc_ht=scontent-cdg2-1.xx&oh=dc5de8b11cdc369b0240a420f09e2d2a&oe=5C5547E8".replace("https://", "http://"),
+                                "https://photos.google.com/search/_tra_/photo/AF1QipNoS1BYk6YZcqmJOOlUNSa_jq_Xj09ztpaKDgYz?hl=fr".replace("https://", "http://"),
                                 theListOfArticles.get(i).getUrl(),
                                 getContext());
                         listItems.add(listItem);

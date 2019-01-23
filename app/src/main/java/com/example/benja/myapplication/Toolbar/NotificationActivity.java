@@ -154,9 +154,9 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
             //Setting Notification Receiver for user to receive daily notifications if new relevant articles have been released
             Calendar calendar = Calendar.getInstance();
 
-            calendar.set(Calendar.HOUR_OF_DAY, 5);
-            calendar.set(Calendar.MINUTE, 12);
-            calendar.set(Calendar.SECOND, 30);
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
 
             Intent myIntent = new Intent(getApplicationContext(), NotficationReceiver.class);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);

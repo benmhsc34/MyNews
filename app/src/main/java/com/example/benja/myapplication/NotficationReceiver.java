@@ -12,9 +12,12 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
+import android.view.View;
 
 import com.example.benja.myapplication.R;
+import com.example.benja.myapplication.Toolbar.NotificationActivity;
 import com.example.benja.myapplication.Utils.Api;
 import com.example.benja.myapplication.RepeatingActivity;
 import com.example.benja.myapplication.Utils.Search_API.SearchArticleFolder;
@@ -32,11 +35,18 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.app.Notification.CATEGORY_MESSAGE;
 import static android.content.Context.MODE_PRIVATE;
+import static android.content.Intent.CATEGORY_APP_MESSAGING;
 import static android.content.Intent.getIntent;
+import static com.example.benja.myapplication.MyNews.CHANNEL_1_ID;
 import static com.example.benja.myapplication.Toolbar.NotificationActivity.MY_PREFS_NAME;
 
 public class NotficationReceiver extends BroadcastReceiver {
+
+    private NotificationManagerCompat notificationManager;
+
+
     @Override
     public void onReceive(final Context context, Intent intent) {
 
@@ -86,7 +96,7 @@ public class NotficationReceiver extends BroadcastReceiver {
 
         Call<SearchArticleList> call;
 
-        call = api.getSearchArticles(searchQuery, categoriesSelected.toString().replace("[", "").replace("]", ""), dateFormat.format(date), null, "5179fffa2a6545a0af9de0645194e78f");
+        call = api.getSearchArticles(searchQuery, categoriesSelected.toString().replace("[", "").replace("]", ""), dateFormat.format(date), null, "q2hYuSZfmtEyizi8LXiL0CGNh27adQoi");
 
 
         if (call != null) {
@@ -105,14 +115,23 @@ public class NotficationReceiver extends BroadcastReceiver {
                                     .setAutoCancel(true);
                             notificationManager.notify(100, builder.build());
                         } else {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-                                /* Create or update. */
-                                NotificationChannel channel = new NotificationChannel("my_channel_01",
-                                        "Channel human readable title",
-                                        NotificationManager.IMPORTANCE_DEFAULT);
-                                //         mNotificationManager.createNotificationChannel(channel);
-                            }
+                            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, MyNews.CHANNEL_1_ID)
+                                    .setSmallIcon(R.drawable.ic_notifications)
+                                    .setContentTitle("Channel Title")
+                                    .setContentText("Channel Text yo")
+                                    .setOngoing(true);
+                            notificationBuilder.build();
+                            notificationManager.notify(1, notificationBuilder.build());
+
+
+
+
+                            /* Create or update.
+                            NotificationChannel channel = new NotificationChannel("my_channel_01",
+                                    "Channel human readable title",
+                                    NotificationManager.IMPORTANCE_DEFAULT);
+                            //         mNotificationManager.createNotificationChannel(channel);
                             int notifyID = 1;
                             String CHANNEL_ID = "my_channel_01";// The id of the channel.
                             CharSequence name = ("channel_name");// The user-visible name of the channel.
@@ -124,7 +143,7 @@ public class NotficationReceiver extends BroadcastReceiver {
                                     .setContentText("You've received new messages.")
                                     .setSmallIcon(R.drawable.mn)
                                     .setChannelId(CHANNEL_ID)
-                                    .build();
+                                    .build();*/
                         }
                     }
                 }
@@ -136,6 +155,14 @@ public class NotficationReceiver extends BroadcastReceiver {
             });
         }
 
+
+    }
+
+    public void sendOnChannel1(View v) {
+
+    }
+
+    public void sendOnChannel2(View v) {
 
     }
 }
