@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">My News</string>
     <string name="tab_text_1">Top Stories</string>
     <string name="tab_text_2">Most Popular Stories</string>
     <string name="tab_text_3">Custom Stories</string>

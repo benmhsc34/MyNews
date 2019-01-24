@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_top"
+            android:icon="@drawable/ic_arrow_upward_black_24dp"
+            android:title="Top stories" />
+        <item
+            android:id="@+id/nav_pop"
+            android:icon="@drawable/ic_supervisor_account_black_24dp"
+            android:title="Popular stories" />
+        <item
+            android:id="@+id/nav_cus"
+            android:icon="@drawable/ic_movie_black_24dp"
+            android:title="Custom stories" />
+    </group>
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_share_black_24dp"
+                android:title="Share">
+
+            </item>
+            <item
+                android:id="@+id/nav_contactUs"
+                android:icon="@drawable/ic_email_black_24dp"
+                android:title="Contacts us">
+
+            </item>
+        </menu>
+    </item>
+</menu>
