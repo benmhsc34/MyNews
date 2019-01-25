@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.benja.myapplication.R;
 
@@ -31,6 +32,8 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeActionContentDescription("Go back");
+
         final EditText searchEditText = findViewById(R.id.editTextSearch);
         final CheckBox artsCB = findViewById(R.id.artsCB);
         final CheckBox businessCB = findViewById(R.id.businessCB);
@@ -50,7 +53,6 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         });
-
 
         Button searchButton = findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -179,6 +181,13 @@ public class SearchActivity extends AppCompatActivity {
                 finish();
         }
         return true;
+    }
+
+    /** METHOD that returns the listOfQueryAndSections
+     * (test purposes)
+     * */
+    public List<String> getListOfSections() {
+        return categoriesSelected;
     }
 
 }

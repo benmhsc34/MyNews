@@ -62,7 +62,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
         viewHolder.textViewTitle.setText(listItem.getDesc());
         viewHolder.textViewDate.setText(listItem.getDate());
-        Picasso.with(context).load(listItem.getUrlImage()).into(viewHolder.imageViewPic);
+        Picasso.get().load(listItem.getUrlImage()).into(viewHolder.imageViewPic);
 
         viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override

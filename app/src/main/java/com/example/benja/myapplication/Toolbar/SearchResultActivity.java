@@ -47,7 +47,7 @@ public class SearchResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
-        TextView noResultsTV = findViewById(R.id.noResultsTV);
+        final TextView noResultsTV = findViewById(R.id.noResultsTV);
 
 
         String searchQuery = "";
@@ -109,7 +109,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
 
             call = api.getSearchArticles(searchQuery, categoriesSelected.toString().replace("[", "").replace("]", ""), outputDateStr, endOutputDateStr, "q2hYuSZfmtEyizi8LXiL0CGNh27adQoi");
-
+            Toast.makeText(this, searchQuery, Toast.LENGTH_SHORT).show();
 
             recyclerView.setAdapter(adapter);
             if (call != null) {
@@ -129,6 +129,7 @@ public class SearchResultActivity extends AppCompatActivity {
                                 if (inputDateStr == null) {
                                     inputDateStr = "2018-10-25T21:09:24";
                                 }
+
                                 Date date = null;
                                 try {
                                     date = inputFormat.parse(inputDateStr);
@@ -145,6 +146,8 @@ public class SearchResultActivity extends AppCompatActivity {
                                             "http://www.nytimes.com/" + theListOfArticles.getDocs().get(i).getMultimedia().get(0).getUrl(),
                                             theListOfArticles.getDocs().get(i).getWeb_url(),
                                             SearchResultActivity.this);
+                                    noResultsTV.setText("No articles matching your search. Try being less specific");
+
                                     listItems.add(listItem);
                                 } else {
                                     ListItem listItem = new ListItem("",
@@ -155,9 +158,12 @@ public class SearchResultActivity extends AppCompatActivity {
                                             theListOfArticles.getDocs().get(i).getWeb_url(),
                                             SearchResultActivity.this);
                                     listItems.add(listItem);
+
                                 }
                             }
                         }
+                            noResultsTV.setText("No articles matching your search. Try being less specific");
+
                         adapter.notifyDataSetChanged();
                     }
 
@@ -165,9 +171,11 @@ public class SearchResultActivity extends AppCompatActivity {
                     public void onFailure(Call<SearchArticleList> call, Throwable t) {
                         Toast.makeText(SearchResultActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                         Log.d("JSON", t.getMessage());
+
                     }
                 });
             }
+
         }
     }
 

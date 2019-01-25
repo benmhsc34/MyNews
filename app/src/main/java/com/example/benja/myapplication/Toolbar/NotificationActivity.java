@@ -183,6 +183,10 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
 
     }
 
+    public List<String> getNotificationListOfSections() {
+        return categoriesSelected;
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

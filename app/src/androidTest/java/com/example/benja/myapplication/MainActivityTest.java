@@ -45,16 +45,7 @@ public class MainActivityTest {
                         isDisplayed()));
         tabView.perform(click());
 
-        ViewInteraction viewPager = onView(
-                allOf(withId(R.id.container),
-                        childAtPosition(
-                                allOf(withId(R.id.main_content),
-                                        childAtPosition(
-                                                withId(android.R.id.content),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        viewPager.perform(swipeLeft());
+
 
         ViewInteraction tabView2 = onView(
                 allOf(withContentDescription("Custom Stories"),
@@ -66,16 +57,7 @@ public class MainActivityTest {
                         isDisplayed()));
         tabView2.perform(click());
 
-        ViewInteraction viewPager2 = onView(
-                allOf(withId(R.id.container),
-                        childAtPosition(
-                                allOf(withId(R.id.main_content),
-                                        childAtPosition(
-                                                withId(android.R.id.content),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        viewPager2.perform(swipeLeft());
+
     }
 
     private static Matcher<View> childAtPosition(
