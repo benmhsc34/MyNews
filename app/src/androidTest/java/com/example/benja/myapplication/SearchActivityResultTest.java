@@ -133,7 +133,7 @@ public class SearchActivityResultTest {
     }
 
     @Test
-    public void testViewsAreWritableAndCheckable () {
+    public void testViewsAreWritableAndCheckable() {
 
         //Clearing the TextInputEditText and unchecking the checkboxes
         onView(withId(R.id.editTextSearch)).perform(clearText());
@@ -153,10 +153,12 @@ public class SearchActivityResultTest {
         //Checking the checkboxes are checked when clicked
         onView(withId(R.id.artsCB)).perform(click()).check(matches(isChecked()));
         onView(withId(R.id.businessCB)).perform(click()).check(matches(isChecked()));
-  //   Rohan to the rescure   onView(withId(R.id.entrepreneursCB)).perform(click()).check(matches(isChecked()));
+        //      Behind keyboard so fail
+        //    onView(withId(R.id.entrepreneursCB)).perform(click()).check(matches(isChecked()));
         onView(withId(R.id.politicsCB)).perform(click()).check(matches(isChecked()));
         onView(withId(R.id.sportsCB)).perform(click()).check(matches(isChecked()));
-   //  Roro to the rescure   onView(withId(R.id.travelCB)).perform(click()).check(matches(isChecked()));
+        //      Behind keyboard so fail
+        //     onView(withId(R.id.travelCB)).perform(click()).check(matches(isChecked()));
 
         //We uncheck all the checkboxes
         if (cb_arts.isChecked()) onView(withId(R.id.artsCB)).perform(click());
@@ -228,7 +230,7 @@ public class SearchActivityResultTest {
 
 
     @Test
-    public void testDisplaySearchArticlesActivityIsLoaded () {
+    public void testDisplaySearchArticlesActivityIsLoaded() {
 
         //Clearing the TextInputEditText and unchecking the checkboxes
         onView(withId(R.id.editTextSearch)).perform(clearText());

@@ -166,7 +166,7 @@ public class NotificationResultTest {
 
 
     }
-    
+
 
     @After
     public void tearDown() throws Exception {

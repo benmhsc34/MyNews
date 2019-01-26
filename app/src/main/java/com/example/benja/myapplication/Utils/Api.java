@@ -2,7 +2,6 @@ package com.example.benja.myapplication.Utils;
 
 import com.example.benja.myapplication.Utils.Custom_API.CustomArticleList;
 import com.example.benja.myapplication.Utils.Popular_API.PopularArticleList;
-import com.example.benja.myapplication.Utils.Search_API.SearchArticleFolder;
 import com.example.benja.myapplication.Utils.Search_API.SearchArticleList;
 import com.example.benja.myapplication.Utils.Top_API.TopArticleList;
 

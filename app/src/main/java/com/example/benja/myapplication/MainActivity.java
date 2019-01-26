@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
+        tabLayout.setupWithViewPager(mViewPager);
 
     }
 
@@ -158,15 +158,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
             case R.id.nav_top:
-                Intent myIntent = new Intent(this, TopStoriesTab.class);
-                startActivity(myIntent);
+                mViewPager.setCurrentItem(0);
                 break;
             case R.id.nav_pop:
-                PopularStoriesTab popTab = new PopularStoriesTab();
-                this.getSupportFragmentManager().beginTransaction().replace(R.id.activity_welcome_coordinator_layout, popTab, "Find top fragment").commit();
+                mViewPager.setCurrentItem(1);
+
                 break;
             case R.id.nav_cus:
-                getSupportFragmentManager().beginTransaction().replace(R.id.tabs, new CustomStoriesTab()).commit();
+                mViewPager.setCurrentItem(2);
+
                 break;
             case R.id.nav_share:
                 Toast.makeText(this, "You share", Toast.LENGTH_SHORT).show();
