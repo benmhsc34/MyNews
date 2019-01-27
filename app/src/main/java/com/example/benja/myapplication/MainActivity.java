@@ -1,6 +1,7 @@
 package com.example.benja.myapplication;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -28,6 +29,8 @@ import com.example.benja.myapplication.Toolbar.AboutActivity;
 import com.example.benja.myapplication.Toolbar.HelpActivity;
 import com.example.benja.myapplication.Toolbar.NotificationActivity;
 import com.example.benja.myapplication.Toolbar.SearchActivity;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -61,8 +64,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_reorder_black_24dp);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        }
+        Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_reorder_black_24dp);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -186,11 +191,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     return new TopStoriesTab();
 
                 case 1:
-                    PopularStoriesTab tab2 = new PopularStoriesTab();
-                    return tab2;
+                    return new PopularStoriesTab();
                 case 2:
-                    CustomStoriesTab tab3 = new CustomStoriesTab();
-                    return tab3;
+                    return new CustomStoriesTab();
                 default:
                     return null;
             }

@@ -4,18 +4,24 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-@SuppressWarnings("CanBeFinal")
+@SuppressWarnings({"ALL", "unused"})
 public class CustomArticle {
 
+    @SuppressWarnings("unused")
     private String section;
-    @SuppressWarnings("CanBeFinal")
+    @SuppressWarnings({"CanBeFinal", "unused"})
     @SerializedName("abstract")
     private
     String description;
+    @SuppressWarnings("unused")
     private String title;
+    @SuppressWarnings("unused")
     private String url;
+    @SuppressWarnings("unused")
     private String published_date;
+    @SuppressWarnings("unused")
     private List<CustomArticleImagesFolder> media;
+
 
     public String getSection() {
         return section;

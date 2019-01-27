@@ -1,6 +1,8 @@
 package com.example.benja.myapplication.Tabs;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +39,7 @@ public class PopularStoriesTab extends Fragment {
     private List<ListItem> listItems;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
         View rootView = inflater.inflate(R.layout.popular_stories_tab, container, false);
@@ -56,15 +59,15 @@ public class PopularStoriesTab extends Fragment {
         recyclerView.setAdapter(adapter);
         call.enqueue(new Callback<PopularArticleList>() {
             @Override
-            public void onResponse(Call<PopularArticleList> call, Response<PopularArticleList> response) {
+            public void onResponse(@NonNull Call<PopularArticleList> call, @NonNull Response<PopularArticleList> response) {
                 PopularArticleList articles = response.body();
-                List<PopularArticle> theListOfArticles = articles.getArticles();
+                List<PopularArticle> theListOfArticles = Objects.requireNonNull(articles).getArticles();
 
 
                 for (int i = 0; i < articles.getArticles().size(); i++) {
 
                     DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    DateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
+                    @SuppressLint("SimpleDateFormat") DateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
                     String inputDateStr = theListOfArticles.get(i).getPublished_date();
                     Date date = null;
                     try {
@@ -99,7 +102,7 @@ public class PopularStoriesTab extends Fragment {
 
 
             @Override
-            public void onFailure(Call<PopularArticleList> call, Throwable t) {
+            public void onFailure(@NonNull Call<PopularArticleList> call, @NonNull Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.d("JSON", t.getMessage());
             }

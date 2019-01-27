@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import java.util.Objects;
+
 public class WebviewActivity extends AppCompatActivity {
     private WebView mWebView;
 
@@ -16,7 +18,7 @@ public class WebviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_webview);
 
         Intent myIntent = getIntent();
-        String websiteUrl = myIntent.getExtras().getString("websiteUrl");
+        String websiteUrl = Objects.requireNonNull(myIntent.getExtras()).getString("websiteUrl");
        // Toast.makeText(this, websiteUrl, Toast.LENGTH_LONG).show();
 
 

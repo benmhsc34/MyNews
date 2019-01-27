@@ -8,10 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
-import android.view.View;
 
 import com.example.benja.myapplication.R;
 import com.example.benja.myapplication.Utils.Api;
@@ -22,6 +21,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -89,19 +89,20 @@ public class NotficationReceiver extends BroadcastReceiver {
 
         if (call != null) {
             call.enqueue(new Callback<SearchArticleList>() {
+                @SuppressWarnings("deprecation")
                 @Override
-                public void onResponse(Call<SearchArticleList> call, Response<SearchArticleList> response) {
+                public void onResponse(@NonNull Call<SearchArticleList> call, @NonNull Response<SearchArticleList> response) {
                     SearchArticleList articles = response.body();
-                    SearchArticleFolder theListOfArticles = articles.getResponse();
+                    SearchArticleFolder theListOfArticles = Objects.requireNonNull(articles).getResponse();
                     if (theListOfArticles.getDocs().size() != 0) {
                         if (Build.VERSION.SDK_INT <= 25) {
-                            NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+                            @SuppressLint("IconColors") NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                                     .setContentIntent(pendingIntent)
                                     .setSmallIcon(R.drawable.mn)
                                     .setContentTitle("My News")
                                     .setContentText("Your articles of the day are ready")
                                     .setAutoCancel(true);
-                            notificationManager.notify(100, builder.build());
+                            Objects.requireNonNull(notificationManager).notify(100, builder.build());
                         } else {
 
                             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, MyNews.CHANNEL_1_ID)
@@ -110,7 +111,7 @@ public class NotficationReceiver extends BroadcastReceiver {
                                     .setContentText("Channel Text yo")
                                     .setOngoing(true);
                             notificationBuilder.build();
-                            notificationManager.notify(1, notificationBuilder.build());
+                            Objects.requireNonNull(notificationManager).notify(1, notificationBuilder.build());
 
 
 
@@ -137,7 +138,7 @@ public class NotficationReceiver extends BroadcastReceiver {
                 }
 
                 @Override
-                public void onFailure(Call<SearchArticleList> call, Throwable t) {
+                public void onFailure(@NonNull Call<SearchArticleList> call, @NonNull Throwable t) {
 
                 }
             });

@@ -45,7 +45,7 @@ public class SearchActivityResultTest {
     //Always make this public
     @Rule
     public ActivityTestRule<SearchActivity> searchArticlesActivityActivityTestRule =
-            new ActivityTestRule<SearchActivity>(SearchActivity.class);
+            new ActivityTestRule<>(SearchActivity.class);
 
     private SearchActivity mActivity = null;
 
@@ -63,7 +63,7 @@ public class SearchActivityResultTest {
     private CheckBox cb_travel;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
 
         mActivity = searchArticlesActivityActivityTestRule.getActivity();
 
@@ -230,7 +230,7 @@ public class SearchActivityResultTest {
 
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
 
         mActivity = null;
 

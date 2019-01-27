@@ -1,5 +1,7 @@
 package com.example.benja.myapplication.Toolbar;
 
+import android.annotation.SuppressLint;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -81,7 +84,7 @@ public class SearchResultActivity extends AppCompatActivity {
         }
 
 
-        if (searchQuery.equals("")) {
+        if (Objects.requireNonNull(searchQuery).equals("")) {
             noResultsTV.setText("Please enter a word in the search bar");
         } else {
 
@@ -99,22 +102,23 @@ public class SearchResultActivity extends AppCompatActivity {
             Call<SearchArticleList> call;
 
 
-            call = api.getSearchArticles(searchQuery, categoriesSelected.toString().replace("[", "").replace("]", ""), outputDateStr, endOutputDateStr, "q2hYuSZfmtEyizi8LXiL0CGNh27adQoi");
+            call = api.getSearchArticles(searchQuery, Objects.requireNonNull(categoriesSelected).toString().replace("[", "").replace("]", ""), outputDateStr, endOutputDateStr, "q2hYuSZfmtEyizi8LXiL0CGNh27adQoi");
             Toast.makeText(this, searchQuery, Toast.LENGTH_SHORT).show();
 
             recyclerView.setAdapter(adapter);
             if (call != null) {
                 call.enqueue(new Callback<SearchArticleList>() {
+                    @SuppressLint("SetTextI18n")
                     @Override
-                    public void onResponse(Call<SearchArticleList> call, Response<SearchArticleList> response) {
+                    public void onResponse(@NonNull Call<SearchArticleList> call, @NonNull Response<SearchArticleList> response) {
                         SearchArticleList articles = response.body();
-                        SearchArticleFolder theListOfArticles = articles.getResponse();
+                        SearchArticleFolder theListOfArticles = Objects.requireNonNull(articles).getResponse();
 
                         if (theListOfArticles != null) {
 
                             for (int i = 0; i < theListOfArticles.getDocs().size(); i++) {
 
-                                DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                                @SuppressLint("SimpleDateFormat") DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                                 DateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
                                 String inputDateStr = theListOfArticles.getDocs().get(i).getPub_date();
                                 if (inputDateStr == null) {
@@ -159,7 +163,7 @@ public class SearchResultActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<SearchArticleList> call, Throwable t) {
+                    public void onFailure(@NonNull Call<SearchArticleList> call, @NonNull Throwable t) {
                         Toast.makeText(SearchResultActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                         Log.d("JSON", t.getMessage());
 

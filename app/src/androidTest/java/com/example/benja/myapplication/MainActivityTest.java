@@ -32,7 +32,7 @@ public class MainActivityTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mainActivityActivityTestRule =
-            new ActivityTestRule<MainActivity>(MainActivity.class);
+            new ActivityTestRule<>(MainActivity.class);
 
     private MainActivity mActivity = null;
 

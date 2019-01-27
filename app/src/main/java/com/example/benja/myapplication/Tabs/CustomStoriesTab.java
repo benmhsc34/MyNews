@@ -1,6 +1,8 @@
 package com.example.benja.myapplication.Tabs;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +42,7 @@ public class CustomStoriesTab extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.top_stories_tab, container, false);
         TextView tv = rootView.findViewById(R.id.section_label);
@@ -61,9 +64,9 @@ public class CustomStoriesTab extends Fragment {
         recyclerView.setAdapter(adapter);
         call.enqueue(new Callback<CustomArticleList>() {
             @Override
-            public void onResponse(Call<CustomArticleList> call, Response<CustomArticleList> response) {
+            public void onResponse(@NonNull Call<CustomArticleList> call, @NonNull Response<CustomArticleList> response) {
                 CustomArticleList articles = response.body();
-                List<CustomArticle> theListOfArticles = articles.getArticles();
+                List<CustomArticle> theListOfArticles = Objects.requireNonNull(articles).getArticles();
 
 
                 //theListOfArticles.get(0).getMedia().get(0).getMediaData().get(0).getUrl();
@@ -71,8 +74,8 @@ public class CustomStoriesTab extends Fragment {
 
                 for (int i = 0; i < articles.getArticles().size(); i++) {
 
-                    DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    DateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
+                    @SuppressLint("SimpleDateFormat") DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    @SuppressLint("SimpleDateFormat") DateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
                     String inputDateStr = theListOfArticles.get(i).getPublished_date();
                     Date date = null;
                     try {
@@ -107,7 +110,7 @@ public class CustomStoriesTab extends Fragment {
 
 
             @Override
-            public void onFailure(Call<CustomArticleList> call, Throwable t) {
+            public void onFailure(@NonNull Call<CustomArticleList> call, @NonNull Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.d("JSON", t.getMessage());
             }

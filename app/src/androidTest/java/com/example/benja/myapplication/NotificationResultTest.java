@@ -1,6 +1,5 @@
 package com.example.benja.myapplication;
 
-import android.app.Instrumentation;
 import android.support.test.rule.ActivityTestRule;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -15,7 +14,6 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -40,7 +38,7 @@ public class NotificationResultTest {
     //Always make this public
     @Rule
     public ActivityTestRule<NotificationActivity> mNotificationActivityActivityTestRule =
-            new ActivityTestRule<NotificationActivity>(NotificationActivity.class);
+            new ActivityTestRule<>(NotificationActivity.class);
 
     private NotificationActivity mActivity = null;
 
@@ -55,7 +53,7 @@ public class NotificationResultTest {
 
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
 
         mActivity = mNotificationActivityActivityTestRule.getActivity();
 
@@ -144,7 +142,7 @@ public class NotificationResultTest {
 
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
 
         mActivity = null;
 

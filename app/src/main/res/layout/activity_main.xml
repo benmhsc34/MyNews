@@ -43,7 +43,8 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="5dp"
-                        android:src="@drawable/download" />
+                        android:src="@drawable/download"
+                        android:contentDescription="TODO" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -52,7 +53,7 @@
                         android:text="MyNews"
                         android:textAlignment="center"
                         android:textColor="#FFF"
-                        android:textSize="30dp" />
+                        android:textSize="30sp" />
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
 
@@ -60,7 +61,8 @@
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="4dp">
+                android:elevation="4dp"
+                tools:targetApi="lollipop">
 
                 <android.support.design.widget.TabItem
                     android:id="@+id/tabItem"

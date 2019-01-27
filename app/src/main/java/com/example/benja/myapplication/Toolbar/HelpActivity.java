@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.example.benja.myapplication.R;
 
+import java.util.Objects;
+
 public class HelpActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
@@ -15,7 +17,7 @@ public class HelpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         TextView contentTextView = findViewById(R.id.helpContent);
 

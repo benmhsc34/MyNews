@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:ignore="GoogleAppIndexingWarning"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:targetApi="m">
         <activity
             android:name=".MainActivity"
@@ -31,8 +31,7 @@
 
         <activity android:name=".RepeatingActivity" />
 
-        <receiver
-            android:name=".NotficationReceiver">
+        <receiver android:name=".NotficationReceiver">
             <intent-filter>
                 <action android:name="my.action.string" />
             </intent-filter>
@@ -40,22 +39,27 @@
 
         <activity
             android:name=".Toolbar.HelpActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Toolbar.AboutActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Toolbar.SearchActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".WebviewActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Toolbar.SearchResultActivity"
-            android:parentActivityName=".Toolbar.SearchActivity" />
+            android:parentActivityName=".Toolbar.SearchActivity"
+            tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Toolbar.NotificationActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            tools:ignore="InnerclassSeparator" />
 
 
     </application>

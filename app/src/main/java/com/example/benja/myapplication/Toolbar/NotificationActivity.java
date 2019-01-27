@@ -1,6 +1,5 @@
 package com.example.benja.myapplication.Toolbar;
 
-import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -21,11 +20,8 @@ import android.widget.Toast;
 import com.example.benja.myapplication.R;
 import com.example.benja.myapplication.NotficationReceiver;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class NotificationActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
@@ -33,12 +29,6 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
 
     public static final String MY_PREFS_NAME = "MyPrefsFile";
     private EditText editText;
-    private CheckBox artsCB;
-    private CheckBox businessCB;
-    private CheckBox entrepreneursCB;
-    private CheckBox sportsCB;
-    private CheckBox travelCB;
-    private CheckBox politicsCB;
     private List<String> categoriesSelected = new ArrayList<>();
 
 
@@ -49,12 +39,12 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
         setContentView(R.layout.activity_notification);
 
         editText = findViewById(R.id.editTextSearchNotification);
-        artsCB = findViewById(R.id.artsCB);
-        businessCB = findViewById(R.id.businessCB);
-        entrepreneursCB = findViewById(R.id.entrepreneursCB);
-        sportsCB = findViewById(R.id.sportsCB);
-        travelCB = findViewById(R.id.travelCB);
-        politicsCB = findViewById(R.id.politicsCB);
+        CheckBox artsCB = findViewById(R.id.artsCB);
+        CheckBox businessCB = findViewById(R.id.businessCB);
+        CheckBox entrepreneursCB = findViewById(R.id.entrepreneursCB);
+        CheckBox sportsCB = findViewById(R.id.sportsCB);
+        CheckBox travelCB = findViewById(R.id.travelCB);
+        CheckBox politicsCB = findViewById(R.id.politicsCB);
 
         Switch notificationSwitch = findViewById(R.id.notificationSwitch);
 

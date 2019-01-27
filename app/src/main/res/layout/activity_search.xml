@@ -67,7 +67,6 @@
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:clickable="true"
-                android:editable="false"
                 android:focusable="false"
                 android:hint="MM/DD/YY"
                 tools:ignore="HardcodedText,KeyboardInaccessibleWidget" />
@@ -80,7 +79,6 @@
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:clickable="true"
-                android:editable="false"
                 android:focusable="false"
                 android:hint="MM/DD/YY"
                 tools:ignore="HardcodedText,KeyboardInaccessibleWidget" />
