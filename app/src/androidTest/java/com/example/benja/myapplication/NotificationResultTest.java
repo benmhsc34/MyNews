@@ -7,7 +7,6 @@ import android.widget.EditText;
 import android.widget.Switch;
 
 import com.example.benja.myapplication.Toolbar.NotificationActivity;
-import com.example.benja.myapplication.Toolbar.SearchActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -18,20 +17,13 @@ import java.util.List;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNotNull;
-import static junit.framework.TestCase.assertTrue;
-import static org.hamcrest.core.IsNot.not;
-import static org.junit.Assert.assertNotSame;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -52,18 +44,6 @@ public class NotificationResultTest {
 
     private NotificationActivity mActivity = null;
 
-    private Instrumentation.ActivityMonitor mainActivityMonitor =
-            getInstrumentation().addMonitor(
-                    MainActivity.class.getName(),
-                    null,
-                    false);
-
-    private Instrumentation.ActivityMonitor displaySearchArticlesActivityMonitor =
-            getInstrumentation().addMonitor(
-                    NotificationActivity.class.getName(),
-                    null,
-                    false);
-
     private CheckBox cb_arts;
     private CheckBox cb_business;
     private CheckBox cb_entrepreneurs;
@@ -71,31 +51,26 @@ public class NotificationResultTest {
     private CheckBox cb_sports;
     private CheckBox cb_travel;
 
-    private List<String> listOfSections;
-
-    private EditText mTextInputEditText;
-
     private Switch notif_switch;
 
 
     @Before
     public void setUp() throws Exception {
 
-        /** With this, we get the context! */
         mActivity = mNotificationActivityActivityTestRule.getActivity();
 
         //Checkboxes
-        cb_arts = (CheckBox) mActivity.findViewById(R.id.artsCB);
-        cb_business = (CheckBox) mActivity.findViewById(R.id.businessCB);
-        cb_entrepreneurs = (CheckBox) mActivity.findViewById(R.id.entrepreneursCB);
-        cb_politics = (CheckBox) mActivity.findViewById(R.id.politicsCB);
-        cb_sports = (CheckBox) mActivity.findViewById(R.id.sportsCB);
-        cb_travel = (CheckBox) mActivity.findViewById(R.id.travelCB);
+        cb_arts = mActivity.findViewById(R.id.artsCB);
+        cb_business = mActivity.findViewById(R.id.businessCB);
+        cb_entrepreneurs = mActivity.findViewById(R.id.entrepreneursCB);
+        cb_politics = mActivity.findViewById(R.id.politicsCB);
+        cb_sports = mActivity.findViewById(R.id.sportsCB);
+        cb_travel = mActivity.findViewById(R.id.travelCB);
 
-        listOfSections = mActivity.getNotificationListOfSections();
+        List<String> listOfSections = mActivity.getNotificationListOfSections();
 
         //TextInputEditText
-        mTextInputEditText = mActivity.findViewById(R.id.editTextSearchNotification);
+        EditText textInputEditText = mActivity.findViewById(R.id.editTextSearchNotification);
 
         notif_switch = mActivity.findViewById(R.id.notificationSwitch);
 

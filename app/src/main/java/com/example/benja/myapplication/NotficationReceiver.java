@@ -1,8 +1,6 @@
 package com.example.benja.myapplication;
 
 import android.annotation.SuppressLint;
-import android.app.Notification;
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -10,16 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 import android.view.View;
 
 import com.example.benja.myapplication.R;
-import com.example.benja.myapplication.Toolbar.NotificationActivity;
 import com.example.benja.myapplication.Utils.Api;
-import com.example.benja.myapplication.RepeatingActivity;
 import com.example.benja.myapplication.Utils.Search_API.SearchArticleFolder;
 import com.example.benja.myapplication.Utils.Search_API.SearchArticleList;
 
@@ -27,7 +22,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,16 +29,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static android.app.Notification.CATEGORY_MESSAGE;
 import static android.content.Context.MODE_PRIVATE;
-import static android.content.Intent.CATEGORY_APP_MESSAGING;
-import static android.content.Intent.getIntent;
-import static com.example.benja.myapplication.MyNews.CHANNEL_1_ID;
 import static com.example.benja.myapplication.Toolbar.NotificationActivity.MY_PREFS_NAME;
 
 public class NotficationReceiver extends BroadcastReceiver {
-
-    private NotificationManagerCompat notificationManager;
 
 
     @Override
@@ -158,11 +146,4 @@ public class NotficationReceiver extends BroadcastReceiver {
 
     }
 
-    public void sendOnChannel1(View v) {
-
-    }
-
-    public void sendOnChannel2(View v) {
-
-    }
 }

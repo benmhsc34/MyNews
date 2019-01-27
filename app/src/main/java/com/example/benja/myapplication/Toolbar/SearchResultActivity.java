@@ -1,15 +1,11 @@
 package com.example.benja.myapplication.Toolbar;
 
-import android.annotation.SuppressLint;
-import android.os.Parcelable;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,10 +13,6 @@ import com.example.benja.myapplication.MyAdapter;
 import com.example.benja.myapplication.R;
 import com.example.benja.myapplication.Utils.Api;
 import com.example.benja.myapplication.Utils.ListItem;
-import com.example.benja.myapplication.Utils.Popular_API.PopularArticle;
-import com.example.benja.myapplication.Utils.Popular_API.PopularArticleList;
-import com.example.benja.myapplication.Utils.Search_API.SearchArticleFolder;
-import com.example.benja.myapplication.Utils.Search_API.SearchArticle;
 import com.example.benja.myapplication.Utils.Search_API.SearchArticleFolder;
 import com.example.benja.myapplication.Utils.Search_API.SearchArticleList;
 
@@ -39,7 +31,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SearchResultActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<ListItem> listItems;
 
@@ -94,7 +85,7 @@ public class SearchResultActivity extends AppCompatActivity {
             noResultsTV.setText("Please enter a word in the search bar");
         } else {
 
-            recyclerView = findViewById(R.id.search_recycler_view);
+            RecyclerView recyclerView = findViewById(R.id.search_recycler_view);
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(SearchResultActivity.this));
             listItems = new ArrayList<>();

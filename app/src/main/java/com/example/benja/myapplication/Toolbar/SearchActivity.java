@@ -3,7 +3,6 @@ package com.example.benja.myapplication.Toolbar;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -13,11 +12,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.benja.myapplication.R;
 
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,7 +23,7 @@ import java.util.Locale;
 
 public class SearchActivity extends AppCompatActivity {
 
-    List<String> categoriesSelected = new ArrayList<>();
+    private List<String> categoriesSelected = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,7 +166,7 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    public void hideKeyboard(View rootView) {
+    private void hideKeyboard(View rootView) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
     }

@@ -2,9 +2,6 @@ package com.example.benja.myapplication;
 
 import android.app.Activity;
 import android.app.Instrumentation;
-import android.opengl.ETC1;
-import android.os.SystemClock;
-import android.support.design.widget.TextInputEditText;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 import android.widget.CheckBox;
@@ -12,34 +9,25 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.benja.myapplication.Toolbar.SearchActivity;
-import com.example.benja.myapplication.Toolbar.SearchResultActivity;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.net.URLDecoder;
 import java.util.List;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.isSelected;
-import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static junit.framework.TestCase.assertNotNull;
-import static junit.framework.TestCase.assertTrue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertNotSame;
 
 /**
@@ -61,12 +49,6 @@ public class SearchActivityResultTest {
 
     private SearchActivity mActivity = null;
 
-    private Instrumentation.ActivityMonitor mainActivityMonitor =
-            getInstrumentation().addMonitor(
-                    MainActivity.class.getName(),
-                    null,
-                    false);
-
     private Instrumentation.ActivityMonitor displaySearchArticlesActivityMonitor =
             getInstrumentation().addMonitor(
                     SearchActivity.class.getName(),
@@ -80,35 +62,27 @@ public class SearchActivityResultTest {
     private CheckBox cb_sports;
     private CheckBox cb_travel;
 
-    private List<String> listOfSections;
-
-    private EditText mTextInputEditText;
-
-    private View endDateButton;
-    private View beginDateButton;
-
     @Before
     public void setUp() throws Exception {
 
-        /** With this, we get the context! */
         mActivity = searchArticlesActivityActivityTestRule.getActivity();
 
         //Checkboxes
-        cb_arts = (CheckBox) mActivity.findViewById(R.id.artsCB);
-        cb_business = (CheckBox) mActivity.findViewById(R.id.businessCB);
-        cb_entrepreneurs = (CheckBox) mActivity.findViewById(R.id.entrepreneursCB);
-        cb_politics = (CheckBox) mActivity.findViewById(R.id.politicsCB);
-        cb_sports = (CheckBox) mActivity.findViewById(R.id.sportsCB);
-        cb_travel = (CheckBox) mActivity.findViewById(R.id.travelCB);
+        cb_arts = mActivity.findViewById(R.id.artsCB);
+        cb_business = mActivity.findViewById(R.id.businessCB);
+        cb_entrepreneurs = mActivity.findViewById(R.id.entrepreneursCB);
+        cb_politics = mActivity.findViewById(R.id.politicsCB);
+        cb_sports = mActivity.findViewById(R.id.sportsCB);
+        cb_travel = mActivity.findViewById(R.id.travelCB);
 
-        listOfSections = mActivity.getListOfSections();
+        List<String> listOfSections = mActivity.getListOfSections();
 
         //TextInputEditText
-        mTextInputEditText = mActivity.findViewById(R.id.editTextSearch);
+        EditText textInputEditText = mActivity.findViewById(R.id.editTextSearch);
 
         //Views (buttons)
-        endDateButton = mActivity.findViewById(R.id.editTextBeginDate);
-        beginDateButton = mActivity.findViewById(R.id.editTextEndDate);
+        View endDateButton = mActivity.findViewById(R.id.editTextBeginDate);
+        View beginDateButton = mActivity.findViewById(R.id.editTextEndDate);
 
     }
 
@@ -180,7 +154,7 @@ public class SearchActivityResultTest {
         //We store the content of the tv (which is inside the button) in a String
         // to compare this String with the one that will be get from the modified
         // text of the TextView when a new Date is set.
-        TextView tv = (TextView) mActivity.findViewById(R.id.editTextBeginDate);
+        TextView tv = mActivity.findViewById(R.id.editTextBeginDate);
         String tvBeforeClick = tv.getText().toString();
 
         onView(withId(R.id.editTextBeginDate)).check(matches(isDisplayed())).perform(click());
@@ -209,7 +183,7 @@ public class SearchActivityResultTest {
         //We store the content of the tv in a String to compare this String with the
         //one that will be get from the modified text of the TextView when a new Date
         //is set.
-        TextView tv = (TextView) mActivity.findViewById(R.id.editTextEndDate);
+        TextView tv = mActivity.findViewById(R.id.editTextEndDate);
         String tvBeforeClick = tv.getText().toString();
 
         onView(withId(R.id.editTextEndDate)).check(matches(isDisplayed())).perform(click());

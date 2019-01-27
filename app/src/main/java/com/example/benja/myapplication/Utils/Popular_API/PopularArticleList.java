@@ -10,16 +10,8 @@ public class PopularArticleList {
     private String copyright;
 
 
-    public PopularArticleList(List<PopularArticle> articles, String copyright) {
-        this.articles = articles;
-        this.copyright = copyright;
-    }
-
     public List<PopularArticle> getArticles() {
         return articles;
     }
 
-    public String getCopyright() {
-        return copyright;
-    }
 }

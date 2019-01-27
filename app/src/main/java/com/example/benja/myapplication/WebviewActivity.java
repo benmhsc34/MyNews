@@ -1,13 +1,11 @@
 package com.example.benja.myapplication;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 public class WebviewActivity extends AppCompatActivity {
     private WebView mWebView;

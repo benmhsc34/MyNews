@@ -42,7 +42,7 @@ public class globalEspressoTest {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void globalEspressoTest() {
+    public void globalEspressoTest1() {
         ViewInteraction viewPager = onView(
                 allOf(withId(R.id.container),
                         childAtPosition(

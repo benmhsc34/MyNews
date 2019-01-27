@@ -32,17 +32,14 @@ public class NotificationActivity extends AppCompatActivity implements CompoundB
 
 
     public static final String MY_PREFS_NAME = "MyPrefsFile";
-    EditText editText;
-    CheckBox artsCB;
-    CheckBox businessCB;
-    CheckBox entrepreneursCB;
-    CheckBox sportsCB;
-    CheckBox travelCB;
-    CheckBox politicsCB;
-    List<String> categoriesSelected = new ArrayList<>();
-    @SuppressLint("SimpleDateFormat")
-    DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-    Date date = new Date();
+    private EditText editText;
+    private CheckBox artsCB;
+    private CheckBox businessCB;
+    private CheckBox entrepreneursCB;
+    private CheckBox sportsCB;
+    private CheckBox travelCB;
+    private CheckBox politicsCB;
+    private List<String> categoriesSelected = new ArrayList<>();
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)

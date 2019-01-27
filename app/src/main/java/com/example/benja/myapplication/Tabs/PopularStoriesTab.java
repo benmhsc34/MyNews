@@ -1,8 +1,5 @@
 package com.example.benja.myapplication.Tabs;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,7 +15,6 @@ import com.example.benja.myapplication.Utils.ListItem;
 import com.example.benja.myapplication.MyAdapter;
 import com.example.benja.myapplication.R;
 import com.example.benja.myapplication.Utils.Popular_API.PopularArticle;
-import com.example.benja.myapplication.Utils.Popular_API.PopularArticleImages;
 import com.example.benja.myapplication.Utils.Popular_API.PopularArticleList;
 
 import java.text.DateFormat;
@@ -34,11 +30,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static android.support.v4.content.ContextCompat.getSystemService;
-
 public class PopularStoriesTab extends Fragment {
 
-    private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<ListItem> listItems;
 
@@ -47,7 +40,7 @@ public class PopularStoriesTab extends Fragment {
 
 
         View rootView = inflater.inflate(R.layout.popular_stories_tab, container, false);
-        recyclerView = rootView.findViewById(R.id.fragment_main_recycler_view);
+        RecyclerView recyclerView = rootView.findViewById(R.id.fragment_main_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         listItems = new ArrayList<>();

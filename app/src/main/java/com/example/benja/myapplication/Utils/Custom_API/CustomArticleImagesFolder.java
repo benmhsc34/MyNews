@@ -1,12 +1,13 @@
 package com.example.benja.myapplication.Utils.Custom_API;
 
-import com.example.benja.myapplication.Utils.Popular_API.PopularArticleImages;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@SuppressWarnings({"ALL", "CanBeFinal"})
 public class CustomArticleImagesFolder {
 
+    @SuppressWarnings("CanBeFinal")
     @SerializedName("media-metadata")
     private List<CustomArticleImages> mediaData;
     private String subtype;

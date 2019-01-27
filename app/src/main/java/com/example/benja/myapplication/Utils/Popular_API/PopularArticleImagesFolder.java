@@ -10,18 +10,10 @@ public class PopularArticleImagesFolder {
     private List<CustomArticleImages> mediaData;
     private String subtype;
 
-    public PopularArticleImagesFolder(List<CustomArticleImages> mediaData, String subtype) {
-        this.mediaData = mediaData;
-        this.subtype = subtype;
-    }
-
     public List<CustomArticleImages> getMediaData() {
         return mediaData;
     }
 
-    public String getSubtype() {
-        return subtype;
-    }
 }
 
 

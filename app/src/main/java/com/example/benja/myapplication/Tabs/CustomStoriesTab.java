@@ -14,10 +14,6 @@ import android.widget.Toast;
 import com.example.benja.myapplication.Utils.Api;
 import com.example.benja.myapplication.Utils.Custom_API.CustomArticle;
 import com.example.benja.myapplication.Utils.Custom_API.CustomArticleList;
-import com.example.benja.myapplication.Utils.Popular_API.PopularArticle;
-import com.example.benja.myapplication.Utils.Popular_API.PopularArticleList;
-import com.example.benja.myapplication.Utils.Top_API.TopArticle;
-import com.example.benja.myapplication.Utils.Top_API.TopArticleList;
 import com.example.benja.myapplication.Utils.ListItem;
 import com.example.benja.myapplication.MyAdapter;
 import com.example.benja.myapplication.R;
@@ -38,7 +34,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CustomStoriesTab extends Fragment {
 
 
-    private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<ListItem> listItems;
 
@@ -50,7 +45,7 @@ public class CustomStoriesTab extends Fragment {
         TextView tv = rootView.findViewById(R.id.section_label);
 
 
-        recyclerView = rootView.findViewById(R.id.fragment_main_recycler_view);
+        RecyclerView recyclerView = rootView.findViewById(R.id.fragment_main_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         listItems = new ArrayList<>();

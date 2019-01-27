@@ -1,14 +1,9 @@
 package com.example.benja.myapplication;
 
-import android.app.ActionBar;
-import android.app.Notification;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,7 +15,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,24 +29,7 @@ import com.example.benja.myapplication.Toolbar.HelpActivity;
 import com.example.benja.myapplication.Toolbar.NotificationActivity;
 import com.example.benja.myapplication.Toolbar.SearchActivity;
 
-import java.util.ArrayList;
-
-import butterknife.BindView;
-
-import static android.app.Notification.CATEGORY_MESSAGE;
-import static com.example.benja.myapplication.MyNews.CHANNEL_1_ID;
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -89,11 +66,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        /*
+      The {@link android.support.v4.view.PagerAdapter} that will provide
+      fragments for each of the sections. We use a
+      {@link FragmentPagerAdapter} derivative, which will keep every
+      loaded fragment in memory. If this becomes too memory intensive, it
+      may be best to switch to a
+      {@link android.support.v4.app.FragmentStatePagerAdapter}.
+     */
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setAdapter(sectionsPagerAdapter);
 
         TabLayout tabLayout = findViewById(R.id.tabs);
 
@@ -198,8 +183,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             switch (position) {
                 case 0:
-                    TopStoriesTab tab1 = new TopStoriesTab();
-                    return tab1;
+                    return new TopStoriesTab();
 
                 case 1:
                     PopularStoriesTab tab2 = new PopularStoriesTab();

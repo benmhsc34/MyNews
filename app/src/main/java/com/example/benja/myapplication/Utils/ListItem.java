@@ -1,7 +1,6 @@
 package com.example.benja.myapplication.Utils;
 
 import android.content.Context;
-import android.net.Uri;
 
 public class ListItem {
 
@@ -27,10 +26,6 @@ public class ListItem {
 
     public String getDate() {
         return date;
-    }
-
-    public Context getContext() {
-        return context;
     }
 
     public String getUrlImage() { return urlImage; }

@@ -9,17 +9,8 @@ public class TopArticleList {
     private List<TopArticle> articles;
     private String copyright;
 
-    public TopArticleList(List<TopArticle> articles, String copyright) {
-        this.articles = articles;
-        this.copyright = copyright;
-    }
-
     public List<TopArticle> getArticles() {
         return articles;
-    }
-
-    public String getCopyright() {
-        return copyright;
     }
 
 
