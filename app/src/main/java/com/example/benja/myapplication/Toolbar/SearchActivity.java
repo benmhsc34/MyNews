@@ -24,6 +24,7 @@ import java.util.Objects;
 
 public class SearchActivity extends AppCompatActivity {
 
+    @SuppressWarnings("CanBeFinal")
     private List<String> categoriesSelected = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {

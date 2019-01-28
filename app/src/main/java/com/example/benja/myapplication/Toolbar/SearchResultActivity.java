@@ -37,6 +37,7 @@ public class SearchResultActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private List<ListItem> listItems;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +57,8 @@ public class SearchResultActivity extends AppCompatActivity {
             categoriesSelected = bundle.getStringArrayList("categoriesSelected");
         }
 
-        DateFormat inputFormat = new SimpleDateFormat("MM/dd/yyyy");
-        DateFormat outputFormat = new SimpleDateFormat("yyyyMMdd");
+        @SuppressLint("SimpleDateFormat") DateFormat inputFormat = new SimpleDateFormat("MM/dd/yyyy");
+        @SuppressLint("SimpleDateFormat") DateFormat outputFormat = new SimpleDateFormat("yyyyMMdd");
         String inputDateStr = theBeginDateString;
         String endInputDateStr = theEndDateString;
         Date date = null;
@@ -119,7 +120,7 @@ public class SearchResultActivity extends AppCompatActivity {
                             for (int i = 0; i < theListOfArticles.getDocs().size(); i++) {
 
                                 @SuppressLint("SimpleDateFormat") DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                                DateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
+                                @SuppressLint("SimpleDateFormat") DateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
                                 String inputDateStr = theListOfArticles.getDocs().get(i).getPub_date();
                                 if (inputDateStr == null) {
                                     inputDateStr = "2018-10-25T21:09:24";

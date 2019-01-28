@@ -15,7 +15,6 @@ import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isSelected;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNull.notNullValue;
@@ -28,6 +27,7 @@ import static org.hamcrest.core.IsNull.notNullValue;
 //    public void addition_isCorrect() {
 //        assertEquals(4, 2 + 2);
 //    }
+@SuppressWarnings("ALL")
 public class MainActivityTest {
 
     @Rule

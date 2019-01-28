@@ -20,7 +20,7 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
         android:text="Tab2"
-        />
+        tools:ignore="HardcodedText" />
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

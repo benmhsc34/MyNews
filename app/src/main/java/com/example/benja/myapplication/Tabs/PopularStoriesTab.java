@@ -66,7 +66,7 @@ public class PopularStoriesTab extends Fragment {
 
                 for (int i = 0; i < articles.getArticles().size(); i++) {
 
-                    DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    @SuppressLint("SimpleDateFormat") DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
                     @SuppressLint("SimpleDateFormat") DateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
                     String inputDateStr = theListOfArticles.get(i).getPublished_date();
                     Date date = null;

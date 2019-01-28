@@ -3,4 +3,12 @@
     <issue id="IconColors">
         <ignore path="src/main/res/drawable/mn.png" />
     </issue>
+    <issue id="IconLocation">
+        <ignore path="src/main/res/drawable/download.png" />
+        <ignore path="src/main/res/drawable/download.png" />
+        <ignore path="src/main/res/drawable/image.jpg" />
+        <ignore path="src/main/res/drawable/image.jpg" />
+        <ignore path="src/main/res/drawable/image.jpg" />
+        <ignore path="src/main/res/drawable/mn.png" />
+    </issue>
 </lint>

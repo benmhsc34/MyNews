@@ -31,7 +31,8 @@
 
         <activity android:name=".RepeatingActivity" />
 
-        <receiver android:name=".NotficationReceiver">
+        <receiver android:name=".NotficationReceiver"
+            tools:ignore="ExportedReceiver">
             <intent-filter>
                 <action android:name="my.action.string" />
             </intent-filter>

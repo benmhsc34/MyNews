@@ -17,13 +17,15 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.example.benja.myapplication.R;
 import com.example.benja.myapplication.NotficationReceiver;
+import com.example.benja.myapplication.R;
+
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+@SuppressWarnings("ALL")
 public class NotificationActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
 

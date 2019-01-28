@@ -1,14 +1,10 @@
-//noinspection GradleCompatible
-//noinspection GradleCompatible
-//noinspection GradleCompatible
-//noinspection GradleCompatible
 apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.benja.myapplication"
-        minSdkVersion 18
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"

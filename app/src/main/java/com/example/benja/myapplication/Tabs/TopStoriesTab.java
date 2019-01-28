@@ -69,7 +69,7 @@ public class TopStoriesTab extends Fragment {
                 for (int i = 0; i < articles.getArticles().size(); i++) {
 
                     @SuppressLint("SimpleDateFormat") DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                    DateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
+                    @SuppressLint("SimpleDateFormat") DateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
                     String inputDateStr = theListOfArticles.get(i).getPublished_date();
                     Date date = null;
                     try {

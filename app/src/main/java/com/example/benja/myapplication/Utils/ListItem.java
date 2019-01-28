@@ -2,6 +2,7 @@ package com.example.benja.myapplication.Utils;
 
 import android.content.Context;
 
+@SuppressWarnings("ALL")
 public class ListItem {
 
     String section;

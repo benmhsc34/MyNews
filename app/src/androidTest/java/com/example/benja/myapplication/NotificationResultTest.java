@@ -22,6 +22,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import com.example.benja.myapplication.R;
+
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -31,11 +33,13 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 //    public void addition_isCorrect() {
 //        assertEquals(4, 2 + 2);
 //    }
+@SuppressWarnings({"ALL", "WeakerAccess"})
 public class NotificationResultTest {
     /**
      * This RULE specifies that this activity is launched
      */
     //Always make this public
+    @SuppressWarnings("CanBeFinal")
     @Rule
     public ActivityTestRule<NotificationActivity> mNotificationActivityActivityTestRule =
             new ActivityTestRule<>(NotificationActivity.class);

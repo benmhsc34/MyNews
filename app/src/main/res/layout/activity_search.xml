@@ -20,7 +20,9 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
             android:hint="Search query term"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText,TextFields"
+            android:importantForAutofill="no"
+            tools:targetApi="o" />
 
         <LinearLayout
             android:id="@+id/linearLayoutDate"
@@ -32,7 +34,6 @@
             android:weightSum="2">
 
             <TextView
-                android:id="@+id/beginDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -42,7 +43,6 @@
                 tools:ignore="HardcodedText" />
 
             <TextView
-                android:id="@+id/endDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -69,7 +69,9 @@
                 android:clickable="true"
                 android:focusable="false"
                 android:hint="MM/DD/YY"
-                tools:ignore="HardcodedText,KeyboardInaccessibleWidget" />
+                tools:ignore="HardcodedText,KeyboardInaccessibleWidget,TextFields"
+                android:importantForAutofill="no"
+                tools:targetApi="o" />
 
             <EditText
                 android:id="@+id/editTextEndDate"
@@ -81,7 +83,9 @@
                 android:clickable="true"
                 android:focusable="false"
                 android:hint="MM/DD/YY"
-                tools:ignore="HardcodedText,KeyboardInaccessibleWidget" />
+                tools:ignore="HardcodedText,KeyboardInaccessibleWidget,TextFields"
+                android:importantForAutofill="no"
+                tools:targetApi="o" />
 
         </LinearLayout>
 

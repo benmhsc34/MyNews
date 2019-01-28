@@ -17,7 +17,9 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
             android:hint="Search query term"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText,TextFields"
+            android:importantForAutofill="no"
+            tools:targetApi="o" />
 
 
         <LinearLayout
@@ -117,8 +119,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/theLine"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="30dp"
             android:text="Enable notifications (once per day)"
             android:textColor="#000"
             android:textSize="18sp"

@@ -38,6 +38,7 @@ import static org.junit.Assert.assertNotSame;
 //    public void addition_isCorrect() {
 //        assertEquals(4, 2 + 2);
 //    }
+@SuppressWarnings({"CanBeFinal", "WeakerAccess"})
 public class SearchActivityResultTest {
     /**
      * This RULE specifies that this activity is launched

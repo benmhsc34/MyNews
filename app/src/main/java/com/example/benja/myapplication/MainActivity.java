@@ -32,6 +32,7 @@ import com.example.benja.myapplication.Toolbar.SearchActivity;
 
 import java.util.Objects;
 
+@SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     /**
