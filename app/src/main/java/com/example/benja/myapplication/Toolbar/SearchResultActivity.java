@@ -142,7 +142,6 @@ public class SearchResultActivity extends AppCompatActivity {
                                             "http://www.nytimes.com/" + theListOfArticles.getDocs().get(i).getMultimedia().get(0).getUrl(),
                                             theListOfArticles.getDocs().get(i).getWeb_url(),
                                             SearchResultActivity.this);
-                                    noResultsTV.setText("No articles matching your search. Try being less specific");
 
                                     listItems.add(listItem);
                                 } else {
@@ -150,7 +149,7 @@ public class SearchResultActivity extends AppCompatActivity {
                                             "",
                                             theListOfArticles.getDocs().get(i).getSnippet(),
                                             outputDateStr,
-                                            "https://photos.google.com/search/_tra_/photo/AF1QipNoS1BYk6YZcqmJOOlUNSa_jq_Xj09ztpaKDgYz?hl=fr".replace("https://", "http://"),
+                                            "https://i.postimg.cc/tTTvdhVF/mn.png".replace("https://", "http://"),
                                             theListOfArticles.getDocs().get(i).getWeb_url(),
                                             SearchResultActivity.this);
                                     listItems.add(listItem);
@@ -158,8 +157,11 @@ public class SearchResultActivity extends AppCompatActivity {
                                 }
                             }
                         }
+                        if (Objects.requireNonNull(theListOfArticles).getDocs().size() == 0) {
                             noResultsTV.setText("No articles matching your search. Try being less specific");
-
+                        } else {
+                            noResultsTV.setText("");
+                        }
                         adapter.notifyDataSetChanged();
                     }
 

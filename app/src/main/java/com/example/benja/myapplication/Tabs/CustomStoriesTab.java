@@ -90,7 +90,7 @@ public class CustomStoriesTab extends Fragment {
                                 "",
                                 theListOfArticles.get(i).getTitle(),
                                 outputDateStr,
-                                "https://photos.google.com/search/_tra_/photo/AF1QipNoS1BYk6YZcqmJOOlUNSa_jq_Xj09ztpaKDgYz?hl=fr".replace("https://", "http://"),
+                                "https://i.postimg.cc/tTTvdhVF/mn.png".replace("https://", "http://"),
                                 theListOfArticles.get(i).getUrl(),
                                 getContext());
                         listItems.add(listItem);

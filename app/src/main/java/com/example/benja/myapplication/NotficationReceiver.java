@@ -52,12 +52,12 @@ public class NotficationReceiver extends BroadcastReceiver {
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         Date date = new Date();
         String searchQuery = prefs.getString("editTextNotification", "");
-        Boolean artsCB = prefs.getBoolean("isArtsChecked", false);
-        Boolean politicsCB = prefs.getBoolean("isPoliticsChecked", false);
-        Boolean entrepreneursCB = prefs.getBoolean("isEntrepreneursChecked", false);
-        Boolean travelCB = prefs.getBoolean("isTravelChecked", false);
-        Boolean sportsCB = prefs.getBoolean("isSportsChecked", false);
-        Boolean businessCB = prefs.getBoolean("isBusinessChecked", false);
+        boolean artsCB = prefs.getBoolean("isArtsChecked", false);
+        boolean politicsCB = prefs.getBoolean("isPoliticsChecked", false);
+        boolean entrepreneursCB = prefs.getBoolean("isEntrepreneursChecked", false);
+        boolean travelCB = prefs.getBoolean("isTravelChecked", false);
+        boolean sportsCB = prefs.getBoolean("isSportsChecked", false);
+        boolean businessCB = prefs.getBoolean("isBusinessChecked", false);
 
         if (artsCB) {
             categoriesSelected.add("arts");
@@ -107,32 +107,12 @@ public class NotficationReceiver extends BroadcastReceiver {
 
                             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, MyNews.CHANNEL_1_ID)
                                     .setSmallIcon(R.drawable.ic_notifications)
-                                    .setContentTitle("Channel Title")
-                                    .setContentText("Channel Text yo")
+                                    .setContentTitle("My News")
+                                    .setContentText("Your articles of the day are ready")
                                     .setOngoing(true);
                             notificationBuilder.build();
                             Objects.requireNonNull(notificationManager).notify(1, notificationBuilder.build());
 
-
-
-
-                            /* Create or update.
-                            NotificationChannel channel = new NotificationChannel("my_channel_01",
-                                    "Channel human readable title",
-                                    NotificationManager.IMPORTANCE_DEFAULT);
-                            //         mNotificationManager.createNotificationChannel(channel);
-                            int notifyID = 1;
-                            String CHANNEL_ID = "my_channel_01";// The id of the channel.
-                            CharSequence name = ("channel_name");// The user-visible name of the channel.
-                            int importance = NotificationManager.IMPORTANCE_HIGH;
-                            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
-                            // Create a notification and set the notification channel.
-                            Notification notification = new Notification.Builder(context)
-                                    .setContentTitle("New Message")
-                                    .setContentText("You've received new messages.")
-                                    .setSmallIcon(R.drawable.mn)
-                                    .setChannelId(CHANNEL_ID)
-                                    .build();*/
                         }
                     }
                 }
